@@ -58,7 +58,7 @@ public class EventSerializerTest extends TestCase {
 
     @Override
     public <T> T deserialize(JsonElement json, Type type) throws JsonParseException {
-      return gson.fromJson(json, type);
+      return (T) gson.fromJson(json, type);
     }
   }
 
