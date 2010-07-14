@@ -1,12 +1,13 @@
 // Copyright 2009 Google Inc. All Rights Reserved.
 package org.waveprotocol.wave.model.document.indexed;
 
+import java.util.Random;
+
+import org.junit.Ignore;
 import org.waveprotocol.wave.model.document.ReadableAnnotationSet;
 import org.waveprotocol.wave.model.operation.OperationException;
 import org.waveprotocol.wave.model.util.CollectionFactory;
 import org.waveprotocol.wave.model.util.CollectionUtils;
-
-import java.util.Random;
 
 /**
  * Code that performs random operations on an AnnotationTree for profiling
@@ -15,6 +16,7 @@ import java.util.Random;
  * @author ohler@google.com (Christian Ohler)
  */
 // Not really a test case, but presubmit fails without this annotation.
+@Ignore
 public class AnnotationTreePerformanceTest {
 
   CollectionFactory getFactory() {

@@ -16,6 +16,7 @@
 
 package org.waveprotocol.wave.model.operation.testing;
 
+import org.junit.Ignore;
 import org.waveprotocol.wave.model.document.operation.Attributes;
 import org.waveprotocol.wave.model.document.operation.BufferedDocOp;
 import org.waveprotocol.wave.model.document.operation.impl.AnnotationBoundaryMapImpl;
@@ -23,6 +24,7 @@ import org.waveprotocol.wave.model.document.operation.impl.AttributesImpl;
 import org.waveprotocol.wave.model.document.operation.impl.AttributesUpdateImpl;
 import org.waveprotocol.wave.model.document.operation.impl.DocOpBuffer;
 
+@Ignore
 public class TestOperations {
 
   // The test case for the message-based implementation should also use this.
