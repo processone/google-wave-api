@@ -12,7 +12,13 @@
 	<artifactId>wave-robot-api</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>wave-robot-api</name>
-	<url>http://maven.apache.org</url>
+	<properties>
+		<!--
+			This property can be overridden through a maven profile. Check out:
+			http://maven.apache.org/plugins/maven-compiler-plugin/examples/compile-using-different-jdk.html
+		-->
+		<JAVA_1_5_HOME>/usr/lib/jvm/java-5-sun</JAVA_1_5_HOME>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -82,6 +88,8 @@
 					<target>1.5</target>
 					<optimize>true</optimize>
 					<debug>true</debug>
+					<fork>true</fork>
+					<executable>${JAVA_1_5_HOME}/bin/javac</executable>
 				</configuration>
 			</plugin>
 			<plugin>
