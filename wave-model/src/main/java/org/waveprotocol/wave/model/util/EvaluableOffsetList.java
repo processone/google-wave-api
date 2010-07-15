@@ -52,16 +52,12 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
    */
   public interface Container<T> extends OffsetList.Container<T> {
 
-    @Override
     Container<T> getPreviousContainer();
 
-    @Override
     Container<T> getNextContainer();
 
-    @Override
     Container<T> insertBefore(T newValue, int valueSize);
 
-    @Override
     Container<T> split(int offset, T newValue);
 
     /**
@@ -136,27 +132,22 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
       this.size = size;
     }
 
-    @Override
     public Container<T> getPreviousContainer() {
       return previousContainer;
     }
 
-    @Override
     public Container<T> getNextContainer() {
       return nextContainer;
     }
 
-    @Override
     public T getValue() {
       return value;
     }
 
-    @Override
     public void setValue(T value) {
       this.value = value;
     }
 
-    @Override
     public int offset() {
       int totalOffset = offset;
       for (Node<T, V> currentNode = this, currentParent = parent; currentParent != null;
@@ -169,12 +160,10 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
       return totalOffset;
     }
 
-    @Override
     public int size() {
       return size;
     }
 
-    @Override
     public Container<T> insertBefore(T newValue, int valueSize) {
       Node<T, V> newContainer = new Node<T, V>(newValue, valueSize);
       newContainer.previousContainer = previousContainer;
@@ -192,7 +181,6 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
       return newContainer;
     }
 
-    @Override
     public void remove() {
       // Assert that the node to remove is not the sentinel node.
       assert parent != null;
@@ -229,7 +217,6 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
       rightChild = null;
     }
 
-    @Override
     public Container<T> split(int offset, T newValue) {
       assert offset >= 0;
       assert offset <= size;
@@ -255,14 +242,12 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
       return newContainer;
     }
 
-    @Override
     public void increaseSize(int sizeDelta) {
       assert size >= -sizeDelta;
       size += sizeDelta;
       correctOffsets(sizeDelta);
     }
 
-    @Override
     public void invalidate() {
       if (subtreeComputation != null) {
         subtreeComputation = null;
@@ -485,17 +470,14 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
     this.operator = operator;
   }
 
-  @Override
   public Container<T> firstContainer() {
     return root.nextContainer;
   }
 
-  @Override
   public Container<T> sentinel() {
     return root;
   }
 
-  @Override
   public <R> R performActionAt(int offset, LocationAction<T, R> locationAction) {
     Node<T, V> node = root;
     while (node != null) {
@@ -513,12 +495,10 @@ public final class EvaluableOffsetList<T, V> implements OffsetList<T> {
     throw new IndexOutOfBoundsException("Invalid offest: " + offset + ", size: " + size());
   }
 
-  @Override
   public int size() {
     return root.offset;
   }
 
-  @Override
   public Iterator<T> iterator() {
     return new Iterator<T>() {
 

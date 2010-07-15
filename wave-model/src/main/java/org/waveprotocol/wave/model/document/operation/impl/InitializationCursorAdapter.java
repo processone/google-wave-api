@@ -31,52 +31,42 @@ public class InitializationCursorAdapter implements DocOpCursor {
     this.inner = inner;
   }
 
-  @Override
   public void annotationBoundary(AnnotationBoundaryMap map) {
     inner.annotationBoundary(map);
   }
 
-  @Override
   public void characters(String chars) {
     inner.characters(chars);
   }
 
-  @Override
   public void elementEnd() {
     inner.elementEnd();
   }
 
-  @Override
   public void elementStart(String type, Attributes attrs) {
     inner.elementStart(type, attrs);
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     throw new UnsupportedOperationException("deleteCharacters");
   }
 
-  @Override
   public void deleteElementEnd() {
     throw new UnsupportedOperationException("deleteElementEnd");
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attrs) {
     throw new UnsupportedOperationException("deleteElementStart");
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     throw new UnsupportedOperationException("replaceAttributes");
   }
 
-  @Override
   public void retain(int itemCount) {
     throw new UnsupportedOperationException("retain");
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attrUpdate) {
     throw new UnsupportedOperationException("updateAttributes");
   }

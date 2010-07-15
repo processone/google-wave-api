@@ -181,21 +181,18 @@ public class Utf16UtilTest extends TestCase {
   public void testTraverseUtf16String1() {
     final int[] call = { 0 };
     Utf16Util.traverseUtf16String("a\uD801b\uDC01\uD802", new CodePointHandler<Void>() {
-      @Override
       public Void codePoint(int cp) {
         assertTrue(call[0] == 0 || call[0] == 2);
         call[0]++;
         return null;
       }
 
-      @Override
       public Void unpairedSurrogate(char c) {
         assertTrue(call[0] == 1 || call[0] == 3 || call[0] == 4);
         call[0]++;
         return null;
       }
 
-      @Override
       public Void endOfString() {
         assertEquals(5, call[0]);
         call[0]++;
@@ -207,19 +204,16 @@ public class Utf16UtilTest extends TestCase {
 
   public void testTraverseUtf16String2() {
     Utf16Util.traverseUtf16String("", new CodePointHandler<Void>() {
-      @Override
       public Void codePoint(int cp) {
         fail();
         throw new AssertionError();
       }
 
-      @Override
       public Void unpairedSurrogate(char c) {
         fail();
         throw new AssertionError();
       }
 
-      @Override
       public Void endOfString() {
         // ok
         return null;

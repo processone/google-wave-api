@@ -48,14 +48,12 @@ public class OpComparators {
   }
 
   public abstract static class AbstractOpEquator implements OpEquator {
-    @Override
     public boolean equal(WaveletOperation a, WaveletOperation b) {
       Preconditions.checkNotNull(a, "First argument is null");
       Preconditions.checkNotNull(b, "Second argument is null");
       return equalNullable(a, b);
     }
 
-    @Override
     public boolean equalNullable(WaveletOperation a, WaveletOperation b) {
       if (a == null) {
         return b == null;
@@ -84,14 +82,12 @@ public class OpComparators {
   }
 
   public static final OpEquator SYNTACTIC_IDENTITY = new AbstractOpEquator() {
-    @Override
     public boolean equal(BufferedDocOp a, BufferedDocOp b) {
       Preconditions.checkNotNull(a, "First argument is null");
       Preconditions.checkNotNull(b, "Second argument is null");
       return equalNullable(a, b);
     }
 
-    @Override
     public boolean equalNullable(BufferedDocOp a, BufferedDocOp b) {
       if (a == null) {
         return b == null;

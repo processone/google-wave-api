@@ -32,7 +32,6 @@ public class DocInitializationBuffer implements
    * 
    * Behaviour is undefined if this buffer is used after calling this method.
    */
-  @Override
   public final BufferedDocInitialization finish() {
     // TODO: This should not need a call to asInitialization().
     return DocOpUtil.asInitialization(BufferedDocOpImpl.create(accu.toArray(EMPTY_ARRAY)));
@@ -45,19 +44,18 @@ public class DocInitializationBuffer implements
     return DocOpUtil.asInitialization(BufferedDocOpImpl.createUnchecked(accu.toArray(EMPTY_ARRAY)));
   }
 
-  @Override
   public final void annotationBoundary(AnnotationBoundaryMap map) {
     accu.add(new AnnotationBoundary(map));
   }
-  @Override
+  
   public final void characters(String s) {
     accu.add(new Characters(s));
   }
-  @Override
+  
   public final void elementEnd() {
     accu.add(ElementEnd.INSTANCE);
   }
-  @Override
+  
   public final void elementStart(String type, Attributes attrs) {
     accu.add(new ElementStart(type, attrs));
   }

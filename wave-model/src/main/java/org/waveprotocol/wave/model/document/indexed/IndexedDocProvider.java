@@ -51,14 +51,12 @@ public class IndexedDocProvider<N, E extends N, T extends N, D extends RawDocume
     return doc;
   }
 
-  @Override
   public IndexedDocument<N, E, T> create(String tag, Map<String, String> attributes) {
 
     return adapt(((RawDocument.Factory<D>) substrateProvider).create(tag, attributes),
         NO_SCHEMA_CONSTRAINTS);
   }
 
-  @Override
   public IndexedDocument<N, E, T> parse(String text) {
     return adapt(substrateProvider.parse("<doc>" + text + "</doc>"), NO_SCHEMA_CONSTRAINTS);
   }
@@ -66,7 +64,6 @@ public class IndexedDocProvider<N, E extends N, T extends N, D extends RawDocume
   private static final Object ONE_OBJECT = new Object();
   private static final Object ANOTHER_OBJECT = new Object();
 
-  @Override
   public IndexedDocument<N, E, T> build(DocInitialization operation, DocumentSchema schema) {
     AnnotationTree<Object> annotations =
       new AnnotationTree<Object>(ONE_OBJECT, ANOTHER_OBJECT, null);

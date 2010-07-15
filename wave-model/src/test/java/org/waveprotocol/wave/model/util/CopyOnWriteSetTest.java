@@ -194,7 +194,6 @@ public class CopyOnWriteSetTest extends TestCase {
 
   public void testConstructionDoesNotCreateNewCollection() {
     CopyOnWriteSet<?> fragile = new CopyOnWriteSet<Object>(new CopyOnWriteSet.CollectionFactory() {
-      @Override
       public <T> Collection<T> copy(Collection<T> xs) {
         fail("Not lazy");
         // Never reached

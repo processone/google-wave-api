@@ -20,7 +20,6 @@ public interface SilentOperationSink<T extends Operation<?>> {
    */
   static final SilentOperationSink<Operation<?>> VOID =
       new SilentOperationSink<Operation<?>>() {
-        @Override
         public void consume(Operation<?> op) {
         }
       };
@@ -30,7 +29,6 @@ public interface SilentOperationSink<T extends Operation<?>> {
    */
   static final SilentOperationSink<Operation<?>> BLOCKED =
       new SilentOperationSink<Operation<?>>() {
-        @Override
         public void consume(Operation<?> op) {
           throw new IllegalStateException("Operation sent to exception sink");
         }
@@ -74,7 +72,6 @@ public interface SilentOperationSink<T extends Operation<?>> {
      */
     public static <O extends Operation<? super T>, T> SilentOperationSink<O> build(final T target) {
       return new SilentOperationSink<O>() {
-        @Override
         public void consume(O op) {
           try {
             op.apply(target);

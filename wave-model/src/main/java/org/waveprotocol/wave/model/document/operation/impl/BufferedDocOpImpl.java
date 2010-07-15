@@ -91,89 +91,74 @@ final class BufferedDocOpImpl implements BufferedDocOp {
     this.components = components;
   }
 
-  @Override
   public int size() {
     return components.length;
   }
 
-  @Override
   public DocOpComponentType getType(int i) {
     return components[i].getType();
   }
 
-  @Override
   public void applyComponent(int i, DocOpCursor cursor) {
     components[i].apply(cursor);
   }
 
-  @Override
   public void apply(DocOpCursor cursor) {
     for (DocOpComponent component : components) {
       component.apply(cursor);
     }
   }
 
-  @Override
   public String getCharactersString(int i) {
     check(i, DocOpComponentType.CHARACTERS);
     return ((Characters) components[i]).string;
   }
 
-  @Override
   public String getDeleteCharactersString(int i) {
     check(i, DocOpComponentType.DELETE_CHARACTERS);
     return ((DeleteCharacters) components[i]).string;
   }
 
-  @Override
   public Attributes getReplaceAttributesNewAttributes(int i) {
     check(i, DocOpComponentType.REPLACE_ATTRIBUTES);
     return ((ReplaceAttributes) components[i]).newAttrs;
   }
 
-  @Override
   public Attributes getReplaceAttributesOldAttributes(int i) {
     check(i, DocOpComponentType.REPLACE_ATTRIBUTES);
     return ((ReplaceAttributes) components[i]).oldAttrs;
   }
 
-  @Override
   public int getRetainItemCount(int i) {
     check(i, DocOpComponentType.RETAIN);
     return ((Retain) components[i]).itemCount;
   }
 
-  @Override
   public AnnotationBoundaryMap getAnnotationBoundary(int i) {
     check(i, DocOpComponentType.ANNOTATION_BOUNDARY);
     return ((AnnotationBoundary) components[i]).boundary;
   }
 
-  @Override
   public Attributes getDeleteElementStartAttributes(int i) {
     check(i, DocOpComponentType.DELETE_ELEMENT_START);
     return ((DeleteElementStart) components[i]).attrs;
   }
 
-  @Override
   public String getDeleteElementStartTag(int i) {
     check(i, DocOpComponentType.DELETE_ELEMENT_START);
     return ((DeleteElementStart) components[i]).type;
   }
 
-  @Override
   public Attributes getElementStartAttributes(int i) {
     check(i, DocOpComponentType.ELEMENT_START);
     return ((ElementStart) components[i]).attrs;
   }
 
-  @Override
   public String getElementStartTag(int i) {
     check(i, DocOpComponentType.ELEMENT_START);
     return ((ElementStart) components[i]).type;
   }
 
-  @Override
   public AttributesUpdate getUpdateAttributesUpdate(int i) {
     check(i, DocOpComponentType.UPDATE_ATTRIBUTES);
     return ((UpdateAttributes) components[i]).update;

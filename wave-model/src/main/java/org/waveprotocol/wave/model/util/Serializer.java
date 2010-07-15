@@ -14,17 +14,14 @@ public interface Serializer<T> {
    * A serializer for string values.
    */
   public final static Serializer<String> STRING = new Serializer<String>() {
-    @Override
     public String fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public String fromString(String s, String defaultValue) {
       return s != null ? s : defaultValue;
     }
 
-    @Override
     public String toString(String x) {
       return x;
     }
@@ -34,19 +31,16 @@ public interface Serializer<T> {
    * A serializer for long values.
    */
   public final static Serializer<Long> LONG = new Serializer<Long>() {
-    @Override
     public Long fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public Long fromString(String s, Long defaultValue) {
       return (s != null)
           ? Long.valueOf(Long.parseLong(s))
           : defaultValue;
     }
 
-    @Override
     public String toString(Long x) {
       return (x != null) ? x.toString() : null;
     }
@@ -56,19 +50,16 @@ public interface Serializer<T> {
    * A serializer for integer values.
    */
   public final static Serializer<Integer> INTEGER = new Serializer<Integer>() {
-    @Override
     public Integer fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public Integer fromString(String s, Integer defaultValue) {
       return (s != null)
           ? Integer.valueOf(Integer.parseInt(s))
           : defaultValue;
     }
 
-    @Override
     public String toString(Integer x) {
       return (x != null) ? x.toString() : null;
     }
@@ -78,19 +69,16 @@ public interface Serializer<T> {
    * A serializer for boolean values.
    */
   public final static Serializer<Boolean> BOOLEAN = new Serializer<Boolean>() {
-    @Override
     public Boolean fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public Boolean fromString(String s, Boolean defaultValue) {
       return (s != null)
           ? Boolean.valueOf(Boolean.parseBoolean(s))
           : defaultValue;
     }
 
-    @Override
     public String toString(Boolean x) {
       return (x != null) ? x.toString() : null;
     }
@@ -100,19 +88,16 @@ public interface Serializer<T> {
    * A serializer for double values.
    */
   public final static Serializer<Double> DOUBLE = new Serializer<Double>() {
-    @Override
     public Double fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public Double fromString(String s, Double defaultValue) {
       return (s != null)
           ? Double.valueOf(Double.parseDouble(s))
           : defaultValue;
     }
 
-    @Override
     public String toString(Double x) {
       return (x != null) ? x.toString() : null;
     }
@@ -135,17 +120,14 @@ public interface Serializer<T> {
       this.enumClass = enumClass;
     }
 
-    @Override
     public E fromString(String s) {
       return fromString(s, null);
     }
 
-    @Override
     public E fromString(String s, E defaultValue) {
       return (s != null) ? E.valueOf(enumClass, s) : defaultValue;
     }
 
-    @Override
     public String toString(E x) {
       return (x != null) ? x.name() : null;
     }

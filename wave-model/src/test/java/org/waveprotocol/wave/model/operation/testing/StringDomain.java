@@ -164,17 +164,14 @@ public class StringDomain implements Domain<StringDomain.Data, StringDomain.Stri
     return group;
   }
 
-  @Override
   public void apply(StringOp op, Data state) throws OperationException {
     op.apply(state);
   }
 
-  @Override
   public StringOp asOperation(Data state) {
     return new StringOp(i(state.value.toString()));
   }
 
-  @Override
   public StringOp compose(StringOp f, StringOp g) throws OperationException {
     Iterator<Component> after = f.components.iterator();
     Iterator<Component> before = g.components.iterator();
@@ -265,7 +262,6 @@ public class StringDomain implements Domain<StringDomain.Data, StringDomain.Stri
     return op;
   }
 
-  @Override
   public OperationPair<StringOp> transform(StringOp clientOp, StringOp serverOp)
       throws TransformException {
     Iterator<Component> client = clientOp.components.iterator();
@@ -353,17 +349,14 @@ public class StringDomain implements Domain<StringDomain.Data, StringDomain.Stri
     return new OperationPair<StringOp>(clientOp2, serverOp2);
   }
 
-  @Override
   public boolean equivalent(Data state1, Data state2) {
     return state1.equals(state2);
   }
 
-  @Override
   public Data initialState() {
     return new Data();
   }
 
-  @Override
   public StringOp invert(StringOp operation) {
     // TODO Auto-generated method stub
     //return null;

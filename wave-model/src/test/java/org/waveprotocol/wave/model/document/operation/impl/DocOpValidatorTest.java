@@ -27,24 +27,20 @@ import java.util.List;
 public final class DocOpValidatorTest extends TestCase {
   public static final DocumentSchema TEST_CONSTRAINTS =
     new DocumentSchema() {
-      @Override
       public boolean permitsAttribute(String type, String attributeName) {
         return false;
       }
 
-      @Override
       public boolean permitsAttribute(String type, String attributeName, String attributeValue) {
         return false;
       }
 
-      @Override
       public boolean permitsChild(String parent, String child) {
         return null == parent && "body".equals(child)
             || "body".equals(parent) && "line".equals(child)
             || "body".equals(parent) && "otherchildofbody".equals(child);
       }
 
-      @Override
       public PermittedCharacters permittedCharacters(String type) {
         if ("body".equals(type)) {
           return PermittedCharacters.BLIP_TEXT;
@@ -52,7 +48,6 @@ public final class DocOpValidatorTest extends TestCase {
         return PermittedCharacters.NONE;
       }
 
-      @Override
       public List<String> getRequiredInitialChildren(String typeOrNull) {
         if ("body".equals(typeOrNull)) {
           return Collections.singletonList("line");
@@ -181,32 +176,26 @@ public final class DocOpValidatorTest extends TestCase {
       this.changeTriplets = changeTriplets;
     }
 
-    @Override
     public int endSize() {
       return endKeys.length;
     }
 
-    @Override
     public int changeSize() {
       return changeTriplets.length / 3;
     }
 
-    @Override
     public String getEndKey(int endIndex) {
       return endKeys[endIndex];
     }
 
-    @Override
     public String getChangeKey(int changeIndex) {
       return changeTriplets[changeIndex * 3];
     }
 
-    @Override
     public String getOldValue(int changeIndex) {
       return changeTriplets[changeIndex * 3 + 1];
     }
 
-    @Override
     public String getNewValue(int changeIndex) {
       return changeTriplets[changeIndex * 3 + 2];
     }

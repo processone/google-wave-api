@@ -31,7 +31,6 @@ public final class ObservableMapImpl<K, V> implements SimpleMap<K, V>, Observabl
     return map;
   }
 
-  @Override
   public V put(K id, V item) {
     V old = items.get(id);
     if (old == item) {
@@ -46,7 +45,6 @@ public final class ObservableMapImpl<K, V> implements SimpleMap<K, V>, Observabl
     return old;
   }
 
-  @Override
   public V remove(K id) {
     V old = items.remove(id);
     if (old != null) {
@@ -55,27 +53,22 @@ public final class ObservableMapImpl<K, V> implements SimpleMap<K, V>, Observabl
     return old;
   }
 
-  @Override
   public void clear() {
     items.clear();
   }
 
-  @Override
   public V get(K key) {
     return items.get(key);
   }
 
-  @Override
   public int size() {
     return items.size();
   }
 
-  @Override
   public boolean isEmpty() {
     return items.isEmpty();
   }
 
-  @Override
   public Iterable<K> copyKeys() {
     return CollectionUtils.newArrayList(items.keySet());
   }
@@ -99,12 +92,10 @@ public final class ObservableMapImpl<K, V> implements SimpleMap<K, V>, Observabl
   // Listeners.
   //
 
-  @Override
   public void addListener(Listener<? super K, ? super V> l) {
     listeners.add(l);
   }
 
-  @Override
   public void removeListener(Listener<? super K, ? super V> l) {
     listeners.remove(l);
   }

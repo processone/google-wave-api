@@ -169,17 +169,14 @@ public final class Utf16Util {
 
   private static final CodePointHandler<Boolean> UNPAIRED_SURROGATES =
     new CodePointHandler<Boolean>() {
-      @Override
       public Boolean codePoint(int cp) {
         return null;
       }
 
-      @Override
       public Boolean unpairedSurrogate(char c) {
         return true;
       }
 
-      @Override
       public Boolean endOfString() {
         return false;
       }};
@@ -336,12 +333,11 @@ public final class Utf16Util {
   public static boolean isXmlName(String s) {
     // Name ::= NameStartChar (NameChar)*
     Preconditions.checkNotNull(s, "Null XML name string");
-    if (s.isEmpty()) {
+    if (s.length() == 0) {
       return false;
     }
     return traverseUtf16String(s, new CodePointHandler<Boolean>() {
       boolean first = true;
-      @Override
       public Boolean codePoint(int cp) {
         if (first) {
           if (!isXmlNameStartChar(cp)) {
@@ -356,12 +352,10 @@ public final class Utf16Util {
         return null;
       }
 
-      @Override
       public Boolean unpairedSurrogate(char c) {
         return false;
       }
 
-      @Override
       public Boolean endOfString() {
         return true;
       }});
@@ -369,7 +363,6 @@ public final class Utf16Util {
 
   private static final CodePointHandler<Boolean> VALID_UTF16 =
     new CodePointHandler<Boolean>() {
-      @Override
       public Boolean codePoint(int cp) {
         if (!isCodePointValid(cp)) {
           return false;
@@ -377,12 +370,10 @@ public final class Utf16Util {
         return null;
       }
 
-      @Override
       public Boolean unpairedSurrogate(char c) {
         return false;
       }
 
-      @Override
       public Boolean endOfString() {
         return true;
       }};
@@ -393,7 +384,6 @@ public final class Utf16Util {
 
   private static final CodePointHandler<Boolean> GOOD_UTF16_FOR_BLIP =
     new CodePointHandler<Boolean>() {
-      @Override
       public Boolean codePoint(int cp) {
         if (isCodePointGoodForBlip(cp) != BlipCodePointResult.OK) {
           return false;
@@ -401,12 +391,10 @@ public final class Utf16Util {
         return null;
       }
 
-      @Override
       public Boolean unpairedSurrogate(char c) {
         return false;
       }
 
-      @Override
       public Boolean endOfString() {
         return true;
       }};
@@ -417,7 +405,6 @@ public final class Utf16Util {
 
   private static final CodePointHandler<Boolean> GOOD_UTF16_FOR_DATA_DOCUMENT =
     new CodePointHandler<Boolean>() {
-      @Override
       public Boolean codePoint(int cp) {
         if (!isCodePointGoodForDataDocument(cp)) {
           return false;
@@ -425,12 +412,10 @@ public final class Utf16Util {
         return null;
       }
 
-      @Override
       public Boolean unpairedSurrogate(char c) {
         return false;
       }
 
-      @Override
       public Boolean endOfString() {
         return true;
       }};

@@ -129,70 +129,60 @@ public final class DocOpValidator {
           }
         }
 
-        @Override
         public void characters(String s) {
           accu[0] = accu[0].mergeWith(a.checkCharacters(s, v));
           abortIfIllFormed();
           a.doCharacters(s);
         }
 
-        @Override
         public void deleteCharacters(String chars) {
           accu[0] = accu[0].mergeWith(a.checkDeleteCharacters(chars, v));
           abortIfIllFormed();
           a.doDeleteCharacters(chars);
         }
 
-        @Override
         public void deleteElementEnd() {
           accu[0] = accu[0].mergeWith(a.checkDeleteElementEnd(v));
           abortIfIllFormed();
           a.doDeleteElementEnd();
         }
 
-        @Override
         public void deleteElementStart(String type, Attributes attrs) {
           accu[0] = accu[0].mergeWith(a.checkDeleteElementStart(type, attrs, v));
           abortIfIllFormed();
           a.doDeleteElementStart(type, attrs);
         }
 
-        @Override
         public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
           accu[0] = accu[0].mergeWith(a.checkReplaceAttributes(oldAttrs, newAttrs, v));
           abortIfIllFormed();
           a.doReplaceAttributes(oldAttrs, newAttrs);
         }
 
-        @Override
         public void retain(int itemCount) {
           accu[0] = accu[0].mergeWith(a.checkRetain(itemCount, v));
           abortIfIllFormed();
           a.doRetain(itemCount);
         }
 
-        @Override
         public void updateAttributes(AttributesUpdate u) {
           accu[0] = accu[0].mergeWith(a.checkUpdateAttributes(u, v));
           abortIfIllFormed();
           a.doUpdateAttributes(u);
         }
 
-        @Override
         public void annotationBoundary(AnnotationBoundaryMap map) {
           accu[0] = accu[0].mergeWith(a.checkAnnotationBoundary(map, v));
           abortIfIllFormed();
           a.doAnnotationBoundary(map);
         }
 
-        @Override
         public void elementEnd() {
           accu[0] = accu[0].mergeWith(a.checkElementEnd(v));
           abortIfIllFormed();
           a.doElementEnd();
         }
 
-        @Override
         public void elementStart(String type, Attributes attrs) {
           accu[0] = accu[0].mergeWith(a.checkElementStart(type, attrs, v));
           abortIfIllFormed();

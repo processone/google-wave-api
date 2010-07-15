@@ -40,7 +40,6 @@ public class GenericAnnotationIntervalIterable<V> implements Iterable<Annotation
         this.nextChange = nextChange;
       }
 
-      @Override
       public int compareTo(KeyEntry other) {
         // PriorityQueue sorts the smallest item to the top.
         return nextChange - other.nextChange;
@@ -90,7 +89,6 @@ public class GenericAnnotationIntervalIterable<V> implements Iterable<Annotation
       // Make annotations and diffFromLeft reflect the first interval
       // make every keyEntry point to the next change for that key
       keys.each(new Proc() {
-        @Override
         public void apply(String key) {
           V startValue = set.getAnnotation(start, key);
           V valueLeft;
@@ -115,13 +113,11 @@ public class GenericAnnotationIntervalIterable<V> implements Iterable<Annotation
       });
     }
 
-    @Override
     public boolean hasNext() {
       // Maybe check nextIntervalStart?
       return first || !entries.isEmpty();
     }
 
-    @Override
     public AnnotationInterval<V> next() {
       if (!hasNext()) {
         throw new NoSuchElementException("No more intervals");
@@ -168,7 +164,6 @@ public class GenericAnnotationIntervalIterable<V> implements Iterable<Annotation
       return interval;
     }
 
-    @Override
     public void remove() {
       throw new UnsupportedOperationException("Removing an annotation interval is not supported");
     }
@@ -187,7 +182,6 @@ public class GenericAnnotationIntervalIterable<V> implements Iterable<Annotation
     this.keys = keys;
   }
 
-  @Override
   public Iterator<AnnotationInterval<V>> iterator() {
     return new GenericAnnotationIntervalIterator<V>(a, start, end, keys);
   }

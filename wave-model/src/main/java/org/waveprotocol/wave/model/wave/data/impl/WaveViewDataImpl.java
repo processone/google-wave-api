@@ -49,22 +49,18 @@ public class WaveViewDataImpl implements WaveViewData {
     this.wavelets = new HashMap<WaveletId, WaveletDataImpl>();
   }
 
-  @Override
   public WaveId getWaveId() {
     return id;
   }
 
-  @Override
   public Iterable<? extends WaveletDataImpl> getWavelets() {
     return Collections.unmodifiableCollection(wavelets.values());
   }
 
-  @Override
   public WaveletDataImpl getWavelet(WaveletId waveletId) {
     return wavelets.get(waveletId);
   }
 
-  @Override
   public WaveletDataImpl createWavelet(WaveletId waveletId) {
     if (wavelets.containsKey(waveletId)) {
       throw new IllegalArgumentException("Duplicate wavelet id: " + waveletId);
@@ -74,7 +70,6 @@ public class WaveViewDataImpl implements WaveViewData {
     return newWavelet;
   }
 
-  @Override
   public void removeWavelet(WaveletId waveletId) {
     if (wavelets.remove(waveletId) == null) {
       throw new IllegalArgumentException(waveletId + " is not present");

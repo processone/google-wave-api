@@ -45,7 +45,6 @@ public class DocumentDomainTest extends TestCase {
 
   protected void createTester(DocumentDomain d, RandomOpGenerator<BootstrapDocument, BufferedDocOp> g) {
     t = new DomainRandomTester<BootstrapDocument, BufferedDocOp>(new Log() {
-        @Override
         public void inconsistent(String... lines) {
           if (!expectFailure) {
             for (String line : lines) {
@@ -55,7 +54,6 @@ public class DocumentDomainTest extends TestCase {
           throw new FailureException();
         }
 
-        @Override
         public void fatal(Throwable exception, String... lines) {
           exception.printStackTrace();
           for (String line : lines) {
@@ -64,7 +62,6 @@ public class DocumentDomainTest extends TestCase {
           fail("EXCEPTION THROWN");
         }
 
-        @Override
         public void info(String... lines) {
           for (String line : lines) {
             System.out.println(line);

@@ -44,7 +44,6 @@ public class StringDomainTest extends TestCase {
 
   protected void createTester(StringDomain d, StringOpGenerator g) {
     t = new DomainRandomTester<StringDomain.Data, StringDomain.StringOp>(new Log() {
-        @Override
         public void inconsistent(String... lines) {
           if (!expectFailure) {
             for (String line : lines) {
@@ -54,7 +53,6 @@ public class StringDomainTest extends TestCase {
           throw new FailureException();
         }
 
-        @Override
         public void fatal(Throwable exception, String... lines) {
           for (String line : lines) {
             System.err.println(line);
@@ -62,7 +60,6 @@ public class StringDomainTest extends TestCase {
           fail("EXCEPTION THROWN");
         }
 
-        @Override
         public void info(String... lines) {
           for (String line : lines) {
             System.out.println(line);

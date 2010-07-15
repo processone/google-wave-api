@@ -125,7 +125,6 @@ public class PersistentContent<N, E extends N, T extends N>
 
   //////////////
 
-  @Override
   public E transparentCreate(String tagName, Map<String, String> attributes,
       E parent, N nodeAfter) {
 
@@ -136,7 +135,6 @@ public class PersistentContent<N, E extends N, T extends N>
     return el;
   }
 
-  @Override
   public T transparentCreate(String text, E parent, N nodeAfter) {
     Point.checkRelationship(fullDoc, parent, nodeAfter, "transparentCreate");
     if (isPersistent(parent)) {
@@ -150,7 +148,6 @@ public class PersistentContent<N, E extends N, T extends N>
     return tx;
   }
 
-  @Override
   public void transparentSetAttribute(E element, String name, String value) {
     if (isPersistent(element)) {
       throw new IllegalArgumentException("transparentSetAttribute: " +
@@ -164,7 +161,6 @@ public class PersistentContent<N, E extends N, T extends N>
     }
   }
 
-  @Override
   public void transparentUnwrap(E element) {
     if (isPersistent(element)) {
       throw new IllegalArgumentException(
@@ -176,7 +172,6 @@ public class PersistentContent<N, E extends N, T extends N>
     fullDoc.removeChild(parent, element);
   }
 
-  @Override
   public void transparentDeepRemove(N node) {
     if (isPersistent(node) || filteredDoc.getFirstChild(node) != null) {
       throw new IllegalArgumentException(
@@ -186,7 +181,6 @@ public class PersistentContent<N, E extends N, T extends N>
     fullDoc.removeChild(fullDoc.getParentElement(node), node);
   }
 
-  @Override
   public void transparentMove(E newParent, N fromIncl,
       N toExcl, N refChild) {
 
@@ -206,7 +200,6 @@ public class PersistentContent<N, E extends N, T extends N>
     fullDoc.insertBefore(newParent, fromIncl, toExcl, refChild);
   }
 
-  @Override
   public void markNodeForPersistence(N localNode, boolean lazy) {
     // by default, do nothing.
   }
@@ -255,13 +248,11 @@ public class PersistentContent<N, E extends N, T extends N>
     return fullDoc.insertBefore(parent, fromIncl, toExcl, refChild);
   }
 
-  @Override
   public N insertBefore(E parent, N newChild, N refChild) {
     return insertBefore(parent,
         newChild, filteredDoc.getNextSibling(newChild), refChild);
   }
 
-  @Override
   public void removeChild(E parent, N oldChild) {
     fullDoc.removeChild(fullDoc.getParentElement(oldChild), oldChild);
   }
@@ -270,7 +261,6 @@ public class PersistentContent<N, E extends N, T extends N>
     return fullDoc.getIndexingContainer(node) != null;
   }
 
-  @Override
   public N transparentSlice(N splitAt) {
     if (splitAt == null) {
       return null;
@@ -323,12 +313,10 @@ public class PersistentContent<N, E extends N, T extends N>
 
   // Simple delegation
 
-  @Override
   public void appendData(T textNode, String arg) {
     fullDoc.appendData(textNode, arg);
   }
 
-  @Override
   public E createElement(String tagName, Map<String, String> attributes, E parent, N nodeAfter) {
     nodeAfter = transparentSlice(nodeAfter);
     if (nodeAfter != null) {
@@ -337,7 +325,6 @@ public class PersistentContent<N, E extends N, T extends N>
     return fullDoc.createElement(tagName, attributes, parent, nodeAfter);
   }
 
-  @Override
   public T createTextNode(String data, E parent, N nodeAfter) {
     nodeAfter = transparentSlice(nodeAfter);
     if (nodeAfter != null) {
@@ -346,67 +333,54 @@ public class PersistentContent<N, E extends N, T extends N>
     return fullDoc.createTextNode(data, parent, nodeAfter);
   }
 
-  @Override
   public void deleteData(T textNode, int offset, int count) {
     fullDoc.deleteData(textNode, offset, count);
   }
 
-  @Override
   public void insertData(T textNode, int offset, String arg) {
     fullDoc.insertData(textNode, offset, arg);
   }
 
-  @Override
   public void removeAttribute(E element, String name) {
     fullDoc.removeAttribute(element, name);
   }
 
-  @Override
   public void setAttribute(E element, String name, String value) {
     fullDoc.setAttribute(element, name, value);
   }
 
-  @Override
   public T splitText(T textNode, int offset) {
     return fullDoc.splitText(textNode, offset);
   }
 
-  @Override
   public void setIndexingContainer(N domNode, OffsetList.Container<N> indexingNode) {
     fullDoc.setIndexingContainer(domNode, indexingNode);
   }
 
-  @Override
   public OffsetList.Container<N> getIndexingContainer(N domNode) {
     return fullDoc.getIndexingContainer(domNode);
   }
 
-  @Override
   public <X> X getProperty(Property<X> property, E element) {
     return elementManager.getProperty(property, element);
   }
 
-  @Override
   public boolean isDestroyed(E element) {
     return elementManager.isDestroyed(element);
   }
 
-  @Override
   public <X> void setProperty(Property<X> property, E element, X value) {
     elementManager.setProperty(property, element, value);
   }
 
-  @Override
   public boolean isTransparent(N node) {
     return !isPersistent(node);
   }
 
-  @Override
   public void onBeforeFilter(Point<N> at) {
     // by default, do nothing
   }
 
-  @Override
   public String toString() {
     return "PersistentContent " + XmlStringBuilder.innerXml(this);
   }

@@ -50,17 +50,15 @@ public class DocIterate {
       final ReadableDocument<N, E, T> doc, final N startNode, final N stopAt,
       final DocIterationFilter<V, N, E, T> iterateFunction) {
     return new Iterable<V>() {
-      @Override
+    	
       public Iterator<V> iterator() {
         return new Iterator<V>() {
           N next = startNode;
 
-          @Override
           public boolean hasNext() {
             return next != null;
           }
 
-          @Override
           public V next() {
             N currentNode = next;
             assert currentNode != null;
@@ -68,7 +66,6 @@ public class DocIterate {
             return iterateFunction.value(doc, currentNode);
           }
 
-          @Override
           public void remove() {
             throw new UnsupportedOperationException("remove");
           }
@@ -88,12 +85,11 @@ public class DocIterate {
       this.rightwards = rightwards; // store direction.
     }
 
-    @Override
     public Object next(ReadableDocument<Object, Object, Object> doc,
         Object current, Object stopAt) {
       return DocHelper.getNextOrPrevNodeDepthFirst(doc, current, stopAt, true, rightwards);
     }
-    @Override
+    
     public Object value(ReadableDocument<Object, Object, Object> doc, Object node) {
       return node;
     }

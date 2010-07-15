@@ -26,7 +26,6 @@ public interface OperationSink<T extends Operation<?>> {
    */
   static final OperationSink<Operation<?>> VOID =
     new OperationSink<Operation<?>>() {
-      @Override
       public void consume(Operation<?> op) {
       }
     };

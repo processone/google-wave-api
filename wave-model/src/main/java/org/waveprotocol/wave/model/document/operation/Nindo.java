@@ -49,7 +49,7 @@ public final class Nindo {
     }
 
     public void characters(String characters) {
-      if (!characters.isEmpty()) {
+      if (characters.length() != 0) {
         mutationList.add(new Characters(characters));
       }
     }
@@ -114,13 +114,11 @@ public final class Nindo {
 
     boolean hasBeenUsed = false;
 
-    @Override
     public void begin() {
       Preconditions.checkState(!hasBeenUsed, "Cannot reuse a builder");
       hasBeenUsed = true;
     }
 
-    @Override
     public void finish() {
       // Do nothing. build() actually builds.
     }
@@ -485,7 +483,7 @@ public final class Nindo {
    * @return The document mutation.
    */
   public static Nindo insertCharacters(int location, String characters) {
-    assert !characters.isEmpty();
+    assert characters.length() != 0;
     List<MutationComponent> mutationList = new ArrayList<MutationComponent>(2);
     mutationList.add(new Skip(location));
     mutationList.add(new Characters(characters));
@@ -725,32 +723,26 @@ public final class Nindo {
     final Builder b = new Builder();
     docOp.apply(new DocOpCursor() {
 
-      @Override
       public void deleteCharacters(String chars) {
         b.deleteCharacters(chars.length());
       }
 
-      @Override
       public void deleteElementEnd() {
         b.deleteElementEnd();
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
         b.deleteElementStart();
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         b.replaceAttributes(newAttrs);
       }
 
-      @Override
       public void retain(int itemCount) {
         b.skip(itemCount);
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         Map<String, String> updates = new HashMap<String, String>();
         for (int i = 0; i < attrUpdate.changeSize(); i++) {
@@ -759,7 +751,6 @@ public final class Nindo {
         b.updateAttributes(updates);
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
         for (int i = 0; i < map.endSize(); i++) {
           b.endAnnotation(map.getEndKey(i));
@@ -769,17 +760,14 @@ public final class Nindo {
         }
       }
 
-      @Override
       public void characters(String chars) {
         b.characters(chars);
       }
 
-      @Override
       public void elementEnd() {
         b.elementEnd();
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
         b.elementStart(type, attrs);
       }

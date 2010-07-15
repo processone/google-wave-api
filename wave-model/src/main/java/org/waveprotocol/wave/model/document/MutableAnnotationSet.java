@@ -103,7 +103,6 @@ public interface MutableAnnotationSet<V> extends ReadableAnnotationSet<V> {
    */
   public class CompareRangedValueByStartThenEnd<V> implements Comparator<RangedValue<V>> {
 
-    @Override
     public int compare(RangedValue<V> left, RangedValue<V> right) {
       int startDelta = left.start - right.start;
       if (startDelta != 0) {

@@ -46,7 +46,6 @@ public class AnnotationsUpdateImpl
    */
   private static final String MAX_STRING = "\uFFFF";
 
-  @Override
   public AnnotationsUpdateImpl composeWith(AnnotationBoundaryMap map) {
     List<AttributeUpdate> newUpdates = new ArrayList<AttributeUpdate>();
     int existingIndex = 0;

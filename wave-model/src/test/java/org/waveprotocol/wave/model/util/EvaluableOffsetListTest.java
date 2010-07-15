@@ -21,7 +21,6 @@ public class EvaluableOffsetListTest extends TestCase {
       offsetList.sentinel().insertBefore(i, i);
     }
     offsetList.performActionAt(55, new LocationAction<Integer, Void>() {
-      @Override
       public Void performAction(Container<Integer> container, int offset) {
         assertTrue(container == offsetList.sentinel());
         assertNull(container.getValue());
@@ -49,7 +48,6 @@ public class EvaluableOffsetListTest extends TestCase {
       offsetList.sentinel().insertBefore(i, i);
     }
     offsetList.performActionAt(location, new LocationAction<Integer, Void>() {
-      @Override
       public Void performAction(Container<Integer> container, int offset) {
         assertEquals(expectedValue, container.getValue());
         assertEquals(expectedOffset, offset);

@@ -28,107 +28,86 @@ public class IdentityView<N, E extends N, T extends N>
     this.inner = inner;
   }
 
-  @Override
   public E asElement(N node) {
     return inner.asElement(node);
   }
 
-  @Override
   public T asText(N node) {
     return inner.asText(node);
   }
 
-  @Override
   public String getAttribute(E element, String name) {
     return inner.getAttribute(element, name);
   }
 
-  @Override
   public Map<String, String> getAttributes(E element) {
     return inner.getAttributes(element);
   }
 
-  @Override
   public String getData(T textNode) {
     return inner.getData(textNode);
   }
 
-  @Override
   public E getDocumentElement() {
     return inner.getDocumentElement();
   }
 
-  @Override
   public int getLength(T textNode) {
     return inner.getLength(textNode);
   }
 
-  @Override
   public short getNodeType(N node) {
     return inner.getNodeType(node);
   }
 
-  @Override
   public String getTagName(E element) {
     return inner.getTagName(element);
   }
 
-  @Override
   public boolean isSameNode(N node, N other) {
     return inner.isSameNode(node, other);
   }
 
-  @Override
   public N getFirstChild(N node) {
     return inner.getFirstChild(node);
   }
 
-  @Override
   public N getLastChild(N node) {
     return inner.getLastChild(node);
   }
 
-  @Override
   public N getNextSibling(N node) {
     return inner.getNextSibling(node);
   }
 
-  @Override
   public E getParentElement(N node) {
     return inner.getParentElement(node);
   }
 
-  @Override
   public N getPreviousSibling(N node) {
     return inner.getPreviousSibling(node);
   }
 
-  @Override
   public N getVisibleNode(N node) {
     return node;
   }
 
-  @Override
   public N getVisibleNodeFirst(N node) {
     return node;
   }
 
-  @Override
   public N getVisibleNodeLast(N node) {
     return node;
   }
 
-  @Override
   public N getVisibleNodeNext(N node) {
     return node;
   }
 
-  @Override
   public N getVisibleNodePrevious(N node) {
     return node;
   }
 
-  @Override
   public void onBeforeFilter(Point<N> at) {
     // do nothing.
   }

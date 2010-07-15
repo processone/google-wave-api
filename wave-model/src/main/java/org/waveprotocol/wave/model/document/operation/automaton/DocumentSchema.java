@@ -34,7 +34,7 @@ public interface DocumentSchema {
   public enum PermittedCharacters {
     /** No characters permitted in this context */
     NONE {
-      @Override
+    	
       public String coerceString(String string) {
         throw new IllegalArgumentException("Text not permitted at all, can't convert");
       }
@@ -42,11 +42,11 @@ public interface DocumentSchema {
 
     /** Only "blip text" characters permitted */
     BLIP_TEXT {
-      @Override
+    	
       public String coerceString(String string) {
         final StringBuilder result = new StringBuilder();
         Utf16Util.traverseUtf16String(string, new CodePointHandler<Void>() {
-          @Override
+        	
           public Void codePoint(int cp) {
             if (cp == '\t') {
               result.append("    ");
@@ -64,13 +64,11 @@ public interface DocumentSchema {
             return null;
           }
 
-          @Override
           public Void unpairedSurrogate(char c) {
             result.append(Utf16Util.REPLACEMENT_CHARACTER);
             return null;
           }
 
-          @Override
           public Void endOfString() {
             return null;
           }
@@ -83,11 +81,11 @@ public interface DocumentSchema {
 
     /** Anything (Though well formedness requires valid unicode excluding surrogates)  */
     ANY {
-      @Override
+    	
       public String coerceString(String string) {
         final StringBuilder result = new StringBuilder();
         Utf16Util.traverseUtf16String(string, new CodePointHandler<Void>() {
-          @Override
+        	
           public Void codePoint(int cp) {
             if (Utf16Util.isSupplementaryCodePoint(cp)) {
               // NOTE: This will need updating when we support supplementary code points.
@@ -101,13 +99,11 @@ public interface DocumentSchema {
             return null;
           }
 
-          @Override
           public Void unpairedSurrogate(char c) {
             result.append(Utf16Util.REPLACEMENT_CHARACTER);
             return null;
           }
 
-          @Override
           public Void endOfString() {
             return null;
           }
@@ -178,27 +174,23 @@ public interface DocumentSchema {
    */
   public static final DocumentSchema NO_SCHEMA_CONSTRAINTS =
       new DocumentSchema() {
-        @Override
+	  
         public boolean permitsAttribute(String type, String attributeName) {
           return true;
         }
 
-        @Override
         public boolean permitsAttribute(String type, String attributeName, String attributeValue) {
           return true;
         }
 
-        @Override
         public boolean permitsChild(String parentType, String childType) {
           return true;
         }
 
-        @Override
         public PermittedCharacters permittedCharacters(String type) {
           return PermittedCharacters.ANY;
         }
 
-        @Override
         public List<String> getRequiredInitialChildren(String typeOrNull) {
           return Collections.emptyList();
         }

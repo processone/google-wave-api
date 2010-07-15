@@ -44,7 +44,6 @@ public final class EventPlumber {
       return this;
     }
 
-    @Override
     public final void detach() {
       doc.removeListener(this);
     }
@@ -70,7 +69,6 @@ public final class EventPlumber {
       return new AttributeListenerAdapter<N, E, T>(doc, listener).attach();
     }
 
-    @Override
     public void onDocumentEvents(EventBundle<N, E, T> bundle) {
       for (DocumentEvent<N, E, T> event : bundle.getEventComponents()) {
         if (event.getType() == DocumentEvent.Type.ATTRIBUTES) {
@@ -101,7 +99,6 @@ public final class EventPlumber {
       return new ElementListenerAdapter<N, E, T>(doc, listener).attach();
     }
 
-    @Override
     public void onDocumentEvents(EventBundle<N, E, T> bundle) {
       // NOTE(koz/hearnden): We call onElementRemoved() before
       // onElementAdded() on purpose so that listeners can refer to stored
@@ -134,7 +131,6 @@ public final class EventPlumber {
       return new DeletionListenerAdapter<N, E, T>(doc, target, listener).attach();
     }
 
-    @Override
     public void onDocumentEvents(EventBundle<N, E, T> event) {
       if (event.wasDeleted(target)) {
         detach();

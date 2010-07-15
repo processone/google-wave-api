@@ -74,7 +74,6 @@ public class WaveletName implements Comparable<WaveletName> {
     return waveId.hashCode() * 37 + waveletId.hashCode();
   }
 
-  @Override
   public int compareTo(WaveletName o) {
     return waveId.equals(o.waveId) ? waveletId.compareTo(o.waveletId)
                                    : waveId.compareTo(o.waveId);

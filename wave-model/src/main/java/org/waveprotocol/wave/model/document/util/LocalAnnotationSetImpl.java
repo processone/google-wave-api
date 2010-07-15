@@ -43,7 +43,6 @@ public class LocalAnnotationSetImpl implements MutableAnnotationSet.Local {
     }
   }
 
-  @Override
   public void setAnnotation(int start, int end, String key, Object value) {
     Preconditions.checkPositionIndexes(start, end, fullAnnotationSet.size());
     checkLocalKey(key);
@@ -61,7 +60,6 @@ public class LocalAnnotationSetImpl implements MutableAnnotationSet.Local {
     }
   }
 
-  @Override
   public void resetAnnotation(int start, int end, String key, Object value) {
     Preconditions.checkPositionIndexes(start, end, fullAnnotationSet.size());
     checkLocalKey(key);
@@ -81,57 +79,47 @@ public class LocalAnnotationSetImpl implements MutableAnnotationSet.Local {
       fullAnnotationSet.finish();
     }
   }
-  @Override
   @Deprecated
   public void resetAnnotationsInRange(int rangeStart, int rangeEnd, String key,
       List<RangedValue<Object>> values) {
     throw new RuntimeException("This method is a server side hack only");
   }
 
-  @Override
   public Object getAnnotation(int start, String key) {
     return fullAnnotationSet.getAnnotation(start, key);
   }
 
-  @Override
   public int firstAnnotationChange(int start, int end, String key, Object fromValue) {
     return fullAnnotationSet.firstAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public int lastAnnotationChange(int start, int end, String key, Object fromValue) {
     return fullAnnotationSet.lastAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public int size() {
     return fullAnnotationSet.size();
   }
 
-  @Override
   public AnnotationCursor annotationCursor(int start, int end, ReadableStringSet keys) {
     return new GenericAnnotationCursor<Object>(this, start, end, keys);
   }
 
-  @Override
   public Iterable<AnnotationInterval<Object>> annotationIntervals(int start, int end,
       ReadableStringSet keys) {
     return fullAnnotationSet.annotationIntervals(start, end, keys);
   }
 
-  @Override
   public Iterable<RangedAnnotation<Object>> rangedAnnotations(int start, int end,
       ReadableStringSet keys) {
     return fullAnnotationSet.rangedAnnotations(start, end, keys);
   }
 
-  @Override
   public void forEachAnnotationAt(int location,
       ReadableStringMap.ProcV<Object> callback) {
     throw new RuntimeException("not implemented");
   }
 
-  @Override
   public ReadableStringSet knownKeys() {
     return fullAnnotationSet.knownKeys();
   }

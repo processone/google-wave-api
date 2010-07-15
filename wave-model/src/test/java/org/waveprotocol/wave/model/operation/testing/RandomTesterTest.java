@@ -49,7 +49,6 @@ public class RandomTesterTest extends TestCase {
 
   protected void createTester(RationalDomain d, AffineGenerator g) {
     t = new DomainRandomTester<RationalDomain.Data, Affine>(new Log() {
-        @Override
         public void inconsistent(String... lines) {
           if (!expectFailure) {
             for (String line : lines) {
@@ -59,7 +58,6 @@ public class RandomTesterTest extends TestCase {
           throw new FailureException();
         }
 
-        @Override
         public void fatal(Throwable exception, String... lines) {
           for (String line : lines) {
             System.err.println(line);
@@ -67,7 +65,6 @@ public class RandomTesterTest extends TestCase {
           fail("EXCEPTION THROWN");
         }
 
-        @Override
         public void info(String... lines) {
           for (String line : lines) {
             System.out.println(line);

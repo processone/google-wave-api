@@ -72,7 +72,7 @@ public class DocOpUtil {
       return (DocInitialization) op;
     } else {
       return new AbstractDocInitialization() {
-        @Override
+    	  
         public void apply(DocInitializationCursor c) {
           op.apply(new InitializationCursorAdapter(c));
         }
@@ -85,42 +85,35 @@ public class DocOpUtil {
       return (BufferedDocInitialization) op;
     } else {
       return new AbstractBufferedDocInitialization() {
-        @Override
+    	  
         public void apply(DocInitializationCursor c) {
           op.apply(new InitializationCursorAdapter(c));
         }
 
-        @Override
         public void applyComponent(int i, DocInitializationCursor c) {
           op.applyComponent(i, new InitializationCursorAdapter(c));
         }
 
-        @Override
         public void applyComponent(int i, DocOpCursor c) {
           op.applyComponent(i, new InitializationCursorAdapter(c));
         }
 
-        @Override
         public AnnotationBoundaryMap getAnnotationBoundary(int i) {
           return op.getAnnotationBoundary(i);
         }
 
-        @Override
         public String getCharactersString(int i) {
           return op.getCharactersString(i);
         }
 
-        @Override
         public Attributes getElementStartAttributes(int i) {
           return op.getElementStartAttributes(i);
         }
 
-        @Override
         public String getElementStartTag(int i) {
           return op.getElementStartTag(i);
         }
 
-        @Override
         public DocInitializationComponentType getType(int i) {
           DocOpComponentType t = op.getType(i);
           if (t instanceof DocInitializationComponentType) {
@@ -131,7 +124,6 @@ public class DocOpUtil {
           }
         }
 
-        @Override
         public int size() {
           return op.size();
         }
@@ -147,52 +139,43 @@ public class DocOpUtil {
 
   public static DocOpCursor createConciseStringBuilder(DocOp op, final StringBuilder b) {
     return new DocOpCursor() {
-      @Override
+    	
       public void deleteCharacters(String chars) {
         b.append("--" + literalString(chars) + "; ");
       }
 
-      @Override
       public void deleteElementEnd() {
         b.append("x>; ");
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
         b.append("x< " + type + " " + toConciseString(attrs) + "; ");
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         b.append("r@ " + toConciseString(oldAttrs) + " " + toConciseString(newAttrs) + "; ");
       }
 
-      @Override
       public void retain(int distance) {
         b.append("__" + distance + "; ");
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         b.append("u@ " + toConciseString(attrUpdate) + "; ");
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
         b.append("|| " + toConciseString(map) + "; ");
       }
 
-      @Override
       public void characters(String chars) {
         b.append("++" + literalString(chars) + "; ");
       }
 
-      @Override
       public void elementEnd() {
         b.append(">>; ");
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
         b.append("<< " + type + " " + toConciseString(attrs) + "; ");
       }
@@ -320,7 +303,6 @@ public class DocOpUtil {
 
         String elementPart;
 
-        @Override
         public void annotationBoundary(AnnotationBoundaryMap map) {
           changes.clear();
           for (int i = 0; i < map.changeSize(); i++) {
@@ -366,7 +348,6 @@ public class DocOpUtil {
           b.append("?>");
         }
 
-        @Override
         public void characters(String chars) {
           if (elementPart != null) {
             b.append(elementPart + ">");
@@ -375,7 +356,6 @@ public class DocOpUtil {
           b.append(xmlTextEscape(chars));
         }
 
-        @Override
         public void elementStart(String type, Attributes attrs) {
           if (elementPart != null) {
             b.append(elementPart + ">");
@@ -385,7 +365,6 @@ public class DocOpUtil {
           tags.add(type);
         }
 
-        @Override
         public void elementEnd() {
           if (elementPart != null) {
             b.append(elementPart + "/>");
@@ -492,49 +471,40 @@ public class DocOpUtil {
   public static int initialDocumentLength(DocOp op) {
     final int[] size = { 0 };
     op.apply(new DocOpCursor() {
-      @Override
+    	
       public void deleteCharacters(String chars) {
         size[0] += chars.length();
       }
 
-      @Override
       public void deleteElementEnd() {
         size[0]++;
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
         size[0]++;
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         size[0]++;
       }
 
-      @Override
       public void retain(int itemCount) {
         size[0] += itemCount;
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         size[0]++;
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
       }
 
-      @Override
       public void characters(String chars) {
       }
 
-      @Override
       public void elementEnd() {
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
       }
     });
@@ -548,48 +518,39 @@ public class DocOpUtil {
   public static int resultingDocumentLength(DocOp op) {
     final int[] size = { 0 };
     op.apply(new DocOpCursor() {
-      @Override
+    	
       public void deleteCharacters(String chars) {
       }
 
-      @Override
       public void deleteElementEnd() {
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         size[0]++;
       }
 
-      @Override
       public void retain(int itemCount) {
         size[0] += itemCount;
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         size[0]++;
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
       }
-
-      @Override
+      
       public void characters(String chars) {
         size[0] += chars.length();
       }
 
-      @Override
       public void elementEnd() {
         size[0]++;
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
         size[0]++;
       }
@@ -639,72 +600,61 @@ public class DocOpUtil {
         }
       }
 
-      @Override
       public void apply(DocInitializationCursor c) {
         target = c;
         op.apply(new DocOpCursor() {
 
-          @Override
           public void deleteCharacters(String chars) {
             opStringifier.deleteCharacters(chars);
             runTarget(chars.length());
             matchUp();
           }
 
-          @Override
           public void deleteElementEnd() {
             opStringifier.deleteElementEnd();
             runTarget(1);
             matchUp();
           }
 
-          @Override
           public void deleteElementStart(String type, Attributes attrs) {
             opStringifier.deleteElementStart(type, attrs);
             runTarget(1);
             matchUp();
           }
 
-          @Override
           public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
             opStringifier.replaceAttributes(oldAttrs, newAttrs);
             runTarget(1);
             matchUp();
           }
 
-          @Override
           public void retain(int itemCount) {
             opStringifier.retain(itemCount);
             runTarget(itemCount);
             matchUp();
           }
 
-          @Override
           public void updateAttributes(AttributesUpdate attrUpdate) {
             opStringifier.updateAttributes(attrUpdate);
             runTarget(1);
             matchUp();
           }
 
-          @Override
           public void annotationBoundary(AnnotationBoundaryMap map) {
             opStringifier.annotationBoundary(map);
             matchUp();
           }
 
-          @Override
           public void characters(String chars) {
             opStringifier.characters(chars);
             matchUp();
           }
 
-          @Override
           public void elementEnd() {
             opStringifier.elementEnd();
             matchUp();
           }
 
-          @Override
           public void elementStart(String type, Attributes attrs) {
             opStringifier.elementStart(type, attrs);
           }

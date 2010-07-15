@@ -27,44 +27,36 @@ public abstract class InMemoryElementList<T, I> implements ElementList<T, I> {
    */
   protected abstract T createInitialized(I initialState);
 
-  @Override
   public T add(I initialState) {
     return add(delegate.size(), initialState);
   }
 
-  @Override
   public T add(int index, I initialState) {
     T element = createInitialized(initialState);
     delegate.add(index, element);
     return element;
   }
 
-  @Override
   public void clear() {
     delegate.clear();
   }
 
-  @Override
   public T get(int index) {
     return delegate.get(index);
   }
 
-  @Override
   public Iterable<T> getValues() {
     return delegate;
   }
 
-  @Override
   public int indexOf(T element) {
     return delegate.indexOf(element);
   }
 
-  @Override
   public boolean remove(T element) {
     return delegate.remove(element);
   }
 
-  @Override
   public int size() {
     return delegate.size();
   }

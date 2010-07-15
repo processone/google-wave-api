@@ -53,52 +53,43 @@ public final class DocOpScrub {
     final DocOpBuffer b = new DocOpBuffer();
 
     op.apply(new DocOpCursor() {
-      @Override
+    	
       public void deleteCharacters(String chars) {
         b.deleteCharacters(scrubString(chars));
       }
 
-      @Override
       public void deleteElementEnd() {
         b.deleteElementEnd();
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
         b.deleteElementStart(type, scrubAttributes(attrs));
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         b.replaceAttributes(scrubAttributes(oldAttrs), scrubAttributes(newAttrs));
       }
 
-      @Override
       public void retain(int itemCount) {
         b.retain(itemCount);
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         b.updateAttributes(scrubAttributesUpdate(attrUpdate));
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
         b.annotationBoundary(scrubAnnotationBoundary(map));
       }
 
-      @Override
       public void characters(String chars) {
         b.characters(scrubString(chars));
       }
 
-      @Override
       public void elementEnd() {
         b.elementEnd();
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
         b.elementStart(type, scrubAttributes(attrs));
       }

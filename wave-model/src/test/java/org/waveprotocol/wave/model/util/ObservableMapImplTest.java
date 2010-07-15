@@ -24,23 +24,19 @@ public final class ObservableMapImplTest extends TestCase {
     private final Queue<Pair<K, V>> removed = CollectionUtils.createQueue();
 
     private final ObservableMap.Listener<K, V> verifier = new ObservableMap.Listener<K, V>() {
-      @Override
       public void onEntryAdded(K key, V value) {
         assertEquals(Pair.of(key, value), added.remove());
       }
 
-      @Override
       public void onEntryRemoved(K key, V value) {
         assertEquals(Pair.of(key, value), removed.remove());
       }
     };
 
-    @Override
     public void onEntryAdded(K key, V value) {
       added.add(Pair.of(key, value));
     }
 
-    @Override
     public void onEntryRemoved(K key, V value) {
       removed.add(Pair.of(key, value));
     }

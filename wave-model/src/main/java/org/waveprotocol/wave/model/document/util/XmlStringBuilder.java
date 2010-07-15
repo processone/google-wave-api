@@ -263,7 +263,6 @@ public abstract class XmlStringBuilder {
   public final XmlStringBuilder wrap(String tagName, StringMap<String> attribs) {
     final List<String> attribList = new ArrayList<String>();
     attribs.each(new ProcV<String>() {
-      @Override
       public void apply(String key, String value) {
         Preconditions.checkNotNull(key, "key should not be null be null");
         Preconditions.checkNotNull(value, "value should not be null be null");

@@ -77,67 +77,56 @@ public final class AnnotationsNormalizer<T> implements EvaluatingDocOpCursor<T> 
     this.target = target;
   }
 
-  @Override
   public T finish() {
     flushAnnotations();
     return target.finish();
   }
 
-  @Override
   public void retain(int itemCount) {
     flushAnnotations();
     target.retain(itemCount);
   }
 
-  @Override
   public void characters(String chars) {
     flushAnnotations();
     target.characters(chars);
   }
 
-  @Override
   public void elementStart(String type, Attributes attrs) {
     flushAnnotations();
     target.elementStart(type, attrs);
   }
 
-  @Override
   public void elementEnd() {
     flushAnnotations();
     target.elementEnd();
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     flushAnnotations();
     target.deleteCharacters(chars);
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attrs) {
     flushAnnotations();
     target.deleteElementStart(type, attrs);
   }
 
-  @Override
   public void deleteElementEnd() {
     flushAnnotations();
     target.deleteElementEnd();
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     flushAnnotations();
     target.replaceAttributes(oldAttrs, newAttrs);
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attrUpdate) {
     flushAnnotations();
     target.updateAttributes(attrUpdate);
   }
 
-  @Override
   public void annotationBoundary(AnnotationBoundaryMap map) {
     int changeSize = map.changeSize();
     for (int i = 0; i < changeSize; ++i)  {
@@ -202,32 +191,26 @@ public final class AnnotationsNormalizer<T> implements EvaluatingDocOpCursor<T> 
     if (!changes.isEmpty() || !ends.isEmpty()) {
       target.annotationBoundary(new AnnotationBoundaryMap() {
 
-        @Override
         public int changeSize() {
           return changes.size();
         }
 
-        @Override
         public String getChangeKey(int changeIndex) {
           return changes.get(changeIndex).key;
         }
 
-        @Override
         public String getOldValue(int changeIndex) {
           return changes.get(changeIndex).oldValue;
         }
 
-        @Override
         public String getNewValue(int changeIndex) {
           return changes.get(changeIndex).newValue;
         }
 
-        @Override
         public int endSize() {
           return ends.size();
         }
 
-        @Override
         public String getEndKey(int endIndex) {
           return ends.get(endIndex);
         }

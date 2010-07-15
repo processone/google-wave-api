@@ -42,42 +42,35 @@ public abstract class AbstractBufferedDocInitialization
     return DocOpUtil.toConciseString(this);
   }
 
-  @Override
   public final int getRetainItemCount(int i) {
     throw new UnsupportedOperationException("Initializations have no retain components");
   }
 
-  @Override
   public final String getDeleteCharactersString(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no delete characters components");
   }
 
-  @Override
   public String getDeleteElementStartTag(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no delete element start components");
   }
 
-  @Override
   public Attributes getDeleteElementStartAttributes(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no delete element start components");
   }
 
-  @Override
   public Attributes getReplaceAttributesOldAttributes(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no replace attributes components");
   }
 
-  @Override
   public Attributes getReplaceAttributesNewAttributes(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no replace attributes components");
   }
 
-  @Override
   public AttributesUpdate getUpdateAttributesUpdate(int i) {
     throw new UnsupportedOperationException(
         "Initializations have no update attributes components");

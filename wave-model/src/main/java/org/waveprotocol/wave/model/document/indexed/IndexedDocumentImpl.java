@@ -332,7 +332,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
 
   private boolean inconsistent = false;
 
-  @Override
   public void consume(DocOp op) throws OperationException {
     consume(op, performValidation);
   }
@@ -390,7 +389,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return nindoCursor.finish2();
   }
 
-  @Override
   public void maybeThrowOperationExceptionFor(Nindo op) throws OperationException {
     ViolationCollector vc = NindoValidator.validate(this, op, schemaConstraints);
     if (!vc.isValid()) {
@@ -428,7 +426,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
 
   private class InvertibleCursor implements DocOpCursor {
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       annotations.skip(1);
 
@@ -449,7 +446,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       onModifyAttributes(currentParent, attrUpdate);
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       assert chars.length() > 0;
       annotations.delete(chars.length());
@@ -458,7 +454,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       onDeleteCharacters(currentLocation, chars);
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       annotations.skip(1);
 
@@ -485,7 +480,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       onModifyAttributes(currentParent, oldAttrs, newAttrs);
     }
 
-    @Override
     public void retain(int itemCount) {
       assert itemCount > 0;
       checkRetain(itemCount);
@@ -496,7 +490,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       moveToCurrentLocation();
     }
 
-    @Override
     public void annotationBoundary(AnnotationBoundaryMap map) {
       for (int i = 0; i < map.endSize(); i++) {
         doEndAnnotation(map.getEndKey(i));
@@ -506,22 +499,18 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       }
     }
 
-    @Override
     public void characters(String characters) {
       doCharacters(characters);
     }
 
-    @Override
     public void elementEnd() {
       doElementEnd();
     }
 
-    @Override
     public void elementStart(String tagName, Attributes attributes) {
       doElementStart(tagName, attributes);
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
 
       E nodeToDelete = substrate.asElement(currentContainer.getValue());
@@ -577,11 +566,9 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       return builder.finish();
     }
 
-    @Override
     public void begin() {
     }
 
-    @Override
     public void finish() {
       int remaining = size() - currentLocation;
       closeEndKeys();
@@ -675,7 +662,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
           });
         }
         open.each(new Proc() {
-          @Override
+        	
           public void apply(String key) {
             events.add(new AnnotationEndEvent(finalLocation, key));
           }
@@ -715,7 +702,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       //System.out.print("INSERT " + requestedValues + ",   " + newValues + ",   " + endKeys);
       //System.out.print(",   " + deletionValues);
       newValues.each(new ProcV<String>() {
-        @Override
+    	  
         public void apply(String key, String value) {
           builder.startAnnotation(key, annotations.getInherited(key), value);
         }
@@ -735,7 +722,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       //System.out.print("UPDATE/SKIP " + requestedValues + ",   " + newValues + ",   " + endKeys);
       //System.out.print(",   " + deletionValues);
       requestedValues.each(new ProcV<String>() {
-        @Override
+    	  
         public void apply(String key, String value) {
           String current = (String) annotations.getAnnotation(currentLocation, key);
           builder.startAnnotation(key, current, value);
@@ -753,7 +740,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
 
     private void closeEndKeys() {
       endKeys.each(new Proc() {
-        @Override
+    	  
         public void apply(String key) {
           builder.endAnnotation(key);
         }
@@ -985,7 +972,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
       final StringSet open = CollectionUtils.createStringSet();
       final StringMap<String> deletionInherit = CollectionUtils.createStringMap();
       deletionValues.each(new ReadableStringMap.ProcV<String>() {
-        @Override
+    	  
         public void apply(String key, String value) {
           deletionInherit.put(key, value);
         }
@@ -999,7 +986,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
         assert i.start() < end;
         final int realStart = Math.max(start, i.start());
         deletionInherit.each(new ReadableStringMap.ProcV<String>() {
-          @Override
+        	
           public void apply(String key, String value) {
             events.add(
                 new AnnotationStartEvent(realStart, key, getAnnotation(realStart, key)));
@@ -1007,7 +994,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
           }
         });
         i.annotations().each(new ReadableStringMap.ProcV<String>() {
-          @Override
+        	
           public void apply(String key, String value) {
             if (!deletionInherit.containsKey(key)) {
               events.add(
@@ -1020,7 +1007,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
 
       // Produce endAnnotation calls for every annotation at the end.
       open.each(new StringSet.Proc() {
-        @Override
+    	  
         public void apply(String key) {
           events.add(new AnnotationEndEvent(end, key));
         }
@@ -1378,7 +1365,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return substrate.getAttribute(element, name);
   }
 
-  @Override
   public int size() {
     checkSizeConsistency("size");
     return offsetList.size();
@@ -1425,7 +1411,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
 
   void checkValidPersistentKeys(ReadableStringSet keys) {
     keys.each(new Proc() {
-      @Override
+    	
       public void apply(String key) {
         Annotations.checkPersistentKey(key);
       }
@@ -1474,7 +1460,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return mergedNode;
   }
 
-  @Override
   public DocInitialization asOperation() {
 
     if (size() == 0) {
@@ -1497,7 +1482,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     }
   }
 
-  @Override
   public DocInitialization toInitialization() {
     return asOperation();
   }
@@ -1537,7 +1521,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     AnnotationInterval<Object> last = null;
     for (AnnotationInterval<Object> i : annotations.annotationIntervals(0, size(), knownKeys())) {
       i.diffFromLeft().each(new ProcV<Object>() {
-        @Override
+    	  
         public void apply(String key, Object value) {
           assert value == null || value instanceof String;
           if (value != null) {
@@ -1552,7 +1536,7 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     }
     if (size() > 0) {
       last.annotations().each(new ProcV<Object>() {
-          @Override
+    	  
           public void apply(String key, Object value) {
   //          assert value != null;
             b.endAnnotation(key);
@@ -1564,11 +1548,10 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return annotationsOp;
   }
 
-  @Override
   public StringSet knownKeys() {
     final StringSet knownKeys = CollectionUtils.createStringSet();
     annotations.knownKeysLive().each(new Proc() {
-      @Override
+    	
       public void apply(String key) {
         if (!Annotations.isLocal(key)) {
           knownKeys.add(key);
@@ -1608,11 +1591,10 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return currentContainer.getValue();
   }
 
-  @Override
   public void forEachAnnotationAt(int location,
       final ReadableStringMap.ProcV<String> callback) {
     annotations.forEachAnnotationAt(location, new ReadableStringMap.ProcV<Object>() {
-      @Override
+    	
       public void apply(String key, Object value) {
         if (!Annotations.isLocal(key)) {
           assert value == null || value instanceof String;
@@ -1634,7 +1616,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     return annotations.annotationCursor(start, end, keys);
   }
 
-  @Override
   public Iterable<AnnotationInterval<String>> annotationIntervals(int start, int end,
       ReadableStringSet keys) {
 
@@ -1647,11 +1628,11 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     final Iterable<AnnotationInterval<Object>> iterable =
         annotations.annotationIntervals(start, end, keys);
     return new Iterable<AnnotationInterval<String>>() {
-      @Override
+    	
       public Iterator<AnnotationInterval<String>> iterator() {
         final Iterator<AnnotationInterval<Object>> iterator = iterable.iterator();
         return new Iterator<AnnotationInterval<String>>() {
-          @Override
+        	
           public boolean hasNext() {
             return iterator.hasNext();
           }
@@ -1661,7 +1642,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
           // an invariant that such keys only have string values. (Local annotation set views
           // disallow setting any values for non-local keys).
           @SuppressWarnings("unchecked")
-          @Override
           public AnnotationInterval<String> next() {
             AnnotationInterval<Object> rawInterval = iterator.next();
             int start = rawInterval.start();
@@ -1671,7 +1651,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
             return new AnnotationIntervalImpl<String>(start, end, annotations, diffFromLeft);
           }
 
-          @Override
           public void remove() {
             iterator.remove();
           }
@@ -1680,7 +1659,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     };
   }
 
-  @Override
   public Iterable<RangedAnnotation<String>> rangedAnnotations(int start, int end,
       ReadableStringSet keys) {
     if (keys == null) {
@@ -1691,16 +1669,15 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     final Iterable<RangedAnnotation<Object>> iterable =
         annotations.rangedAnnotations(start, end, keys);
     return new Iterable<RangedAnnotation<String>>() {
-      @Override
+    	
       public Iterator<RangedAnnotation<String>> iterator() {
         final Iterator<RangedAnnotation<Object>> iterator = iterable.iterator();
         return new Iterator<RangedAnnotation<String>>() {
-          @Override
+        	
           public boolean hasNext() {
             return iterator.hasNext();
           }
 
-          @Override
           public RangedAnnotation<String> next() {
             RangedAnnotation<Object> rawRange = iterator.next();
             String key = rawRange.key();
@@ -1711,7 +1688,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
             return new RangedAnnotationImpl<String>(key, value, start, end);
           }
 
-          @Override
           public void remove() {
             iterator.remove();
           }
@@ -1720,7 +1696,6 @@ public class IndexedDocumentImpl<N, E extends N, T extends N, V>
     };
   }
 
-  @Override
   public String toXmlString() {
     return DocOpUtil.toXmlString(asOperation());
   }

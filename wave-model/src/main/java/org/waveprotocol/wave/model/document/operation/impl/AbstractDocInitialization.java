@@ -27,7 +27,6 @@ import org.waveprotocol.wave.model.document.operation.DocOpCursor;
  */
 public abstract class AbstractDocInitialization implements DocInitialization {
 
-  @Override
   public void apply(DocOpCursor c) {
     apply((DocInitializationCursor) c);
   }

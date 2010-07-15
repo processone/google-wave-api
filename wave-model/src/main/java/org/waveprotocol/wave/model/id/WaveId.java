@@ -83,7 +83,7 @@ public final class WaveId implements Comparable<WaveId> {
       Preconditions.nullPointer("Cannot create wave id with null value in [domain:"
           + domain + "] [id:" + id + "]");
     }
-    if (domain.isEmpty() || id.isEmpty()) {
+    if (domain.length() == 0 || id.length() == 0) {
       Preconditions.illegalArgument("Cannot create wave id with empty value in [domain:"
           + domain + "] [id:" + id + "]");
     }
@@ -149,7 +149,6 @@ public final class WaveId implements Comparable<WaveId> {
     return "[WaveId:" + serialise() + "]";
   }
 
-  @Override
   public int compareTo(WaveId other) {
     int domainCompare = domain.compareTo(other.domain);
     if (domainCompare == 0) {

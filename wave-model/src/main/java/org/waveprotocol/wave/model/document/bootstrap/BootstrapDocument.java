@@ -169,11 +169,10 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     this(DocumentSchema.NO_SCHEMA_CONSTRAINTS);
   }
 
-  @Override
   public DocInitialization asOperation() {
     checkConsistent();
     return new AbstractDocInitialization() {
-      @Override
+    	
       public void apply(DocInitializationCursor c) {
         for (Item i : items) {
           i.applyItem(c);
@@ -189,7 +188,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     };
   }
 
-  @Override
   public int length() {
     checkConsistent();
     return items.size();
@@ -198,7 +196,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
   private ListIterator<Item> readIterator;
   private final List<String> tagNames = new ArrayList<String>();
 
-  @Override
   public String elementStartingAt(int pos) {
     checkConsistent();
     Item item = advance(pos);
@@ -209,7 +206,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     }
   }
 
-  @Override
   public Attributes attributesAt(int pos) {
     checkConsistent();
     Item item = advance(pos);
@@ -220,7 +216,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     }
   }
 
-  @Override
   public String elementEndingAt(int pos) {
     checkConsistent();
     Item item = advance(pos);
@@ -231,7 +226,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     }
   }
 
-  @Override
   public int charAt(int pos) {
     checkConsistent();
     Item item = advance(pos);
@@ -244,7 +238,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     }
   }
 
-  @Override
   public String nthEnclosingElementTag(int insertionPoint, int depth) {
     checkConsistent();
     advance(insertionPoint);
@@ -254,7 +247,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     return tagNames.get(tagNames.size() - 1 - depth);
   }
 
-  @Override
   public int remainingCharactersInElement(int insertionPoint) {
     checkConsistent();
     advance(insertionPoint);
@@ -275,14 +267,12 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     return num;
   }
 
-  @Override
   public AnnotationMap annotationsAt(int pos) {
     checkConsistent();
     Preconditions.checkElementIndex(pos, items.size());
     return advance(pos).getAnnotations();
   }
 
-  @Override
   public String getAnnotation(int pos, String key) {
     checkConsistent();
     Preconditions.checkElementIndex(pos, items.size());
@@ -293,7 +283,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
     return a == null ? b == null : a.equals(b);
   }
 
-  @Override
   public int firstAnnotationChange(int start, int end, String key, String fromValue) {
     Preconditions.checkPositionIndexes(start, end, items.size());
     for (int pos = start; pos < end; pos++) {
@@ -338,7 +327,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
 
   AnnotationsUpdate annotationUpdates;
 
-  @Override
   public void consume(DocOp m) throws OperationException {
     checkConsistent();
 
@@ -366,7 +354,6 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
           return inherited.updateWith(annotationUpdates);
         }
 
-        @Override
         public void annotationBoundary(AnnotationBoundaryMap map) {
           annotationUpdates = annotationUpdates.composeWith(map);
           for (int i = 0; i < map.changeSize(); i++) {
@@ -374,24 +361,20 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
           }
         }
 
-        @Override
         public void characters(String s) {
           for (int i = 0; i < s.length(); i++) {
             iterator.add(new CharacterItem(s.charAt(i), insertionAnnotations()));
           }
         }
 
-        @Override
         public void elementStart(String type, Attributes attrs) {
           iterator.add(new ElementStartItem(type, attrs, insertionAnnotations()));
         }
 
-        @Override
         public void elementEnd() {
           iterator.add(new ElementEndItem(insertionAnnotations()));
         }
 
-        @Override
         public void deleteCharacters(String s) {
           for (int i = 0; i < s.length(); i++) {
             CharacterItem item = nextCharacter();
@@ -404,35 +387,30 @@ public class BootstrapDocument implements ModifiableDocument, AutomatonDocument,
           }
         }
 
-        @Override
         public void deleteElementEnd() {
           ElementEndItem item = nextElementEnd();
           inherited = item.getAnnotations();
           iterator.remove();
         }
 
-        @Override
         public void deleteElementStart(String tag, Attributes attrs) {
           ElementStartItem item = nextElementStart();
           inherited = item.getAnnotations();
           iterator.remove();
         }
 
-        @Override
         public void retain(int distance) {
           for (int i = 0; i < distance; i++) {
             inheritAndAnnotate(next());
           }
         }
 
-        @Override
         public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
           ElementStartItem item = nextElementStart();
           item.replaceAttributes(newAttrs);
           inheritAndAnnotate(item);
         }
 
-        @Override
         public void updateAttributes(AttributesUpdate attrUpdate) {
           ElementStartItem item = nextElementStart();
           item.updateAttributes(attrUpdate);

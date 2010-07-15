@@ -60,7 +60,6 @@ public class UncheckedDocOpBuffer implements EvaluatingDocOpCursor<BufferedDocOp
    *
    * Behaviour is undefined if this buffer is used after calling this method.
    */
-  @Override
   public BufferedDocOp finish() {
     return finishUnchecked();
   }
@@ -83,43 +82,42 @@ public class UncheckedDocOpBuffer implements EvaluatingDocOpCursor<BufferedDocOp
     return BufferedDocOpImpl.createUnchecked(accu.toArray(EMPTY_ARRAY));
   }
 
-  @Override
   public final void annotationBoundary(AnnotationBoundaryMap map) {
     accu.add(new AnnotationBoundary(map));
   }
-  @Override
+  
   public final void characters(String s) {
     accu.add(new Characters(s));
   }
-  @Override
+  
   public final void elementEnd() {
     accu.add(ElementEnd.INSTANCE);
   }
-  @Override
+  
   public final void elementStart(String type, Attributes attrs) {
     accu.add(new ElementStart(type, attrs));
   }
-  @Override
+  
   public final void deleteCharacters(String s) {
     accu.add(new DeleteCharacters(s));
   }
-  @Override
+  
   public final void retain(int itemCount) {
     accu.add(new Retain(itemCount));
   }
-  @Override
+  
   public final void deleteElementEnd() {
     accu.add(DeleteElementEnd.INSTANCE);
   }
-  @Override
+  
   public final void deleteElementStart(String type, Attributes attrs) {
     accu.add(new DeleteElementStart(type, attrs));
   }
-  @Override
+  
   public final void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     accu.add(new ReplaceAttributes(oldAttrs, newAttrs));
   }
-  @Override
+  
   public final void updateAttributes(AttributesUpdate update) {
     accu.add(new UpdateAttributes(update));
   }

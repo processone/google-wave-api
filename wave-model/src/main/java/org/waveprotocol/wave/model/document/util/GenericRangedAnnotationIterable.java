@@ -40,7 +40,6 @@ public class GenericRangedAnnotationIterable<V> implements Iterable<RangedAnnota
         this.value = initialValue;
       }
 
-      @Override
       public int compareTo(KeyEntry<V> other) {
         // PriorityQueue sorts the smallest item to the top.
         return start - other.start;
@@ -68,7 +67,6 @@ public class GenericRangedAnnotationIterable<V> implements Iterable<RangedAnnota
       }
 
       keys.each(new Proc() {
-        @Override
         public void apply(String key) {
           V firstValue = a.getAnnotation(start, key);
           int firstStart;
@@ -86,12 +84,10 @@ public class GenericRangedAnnotationIterable<V> implements Iterable<RangedAnnota
       });
     }
 
-    @Override
     public boolean hasNext() {
       return !entries.isEmpty();
     }
 
-    @Override
     public RangedAnnotation<V> next() {
       if (!hasNext()) {
         throw new NoSuchElementException("No more ranged annotations");
@@ -118,7 +114,6 @@ public class GenericRangedAnnotationIterable<V> implements Iterable<RangedAnnota
       return rangedAnnotation;
     }
 
-    @Override
     public void remove() {
       throw new UnsupportedOperationException("Removing a ranged annotation is not supported");
     }
@@ -137,7 +132,6 @@ public class GenericRangedAnnotationIterable<V> implements Iterable<RangedAnnota
     this.keys = keys;
   }
 
-  @Override
   public Iterator<RangedAnnotation<V>> iterator() {
     return new GenericRangedAnnotationIterator<V>(a, start, end, keys);
   }

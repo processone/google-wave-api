@@ -39,52 +39,42 @@ public final class DocOpInverter<T> implements EvaluatingDocOpCursor<T> {
     this.target = target;
   }
 
-  @Override
   public T finish() {
     return target.finish();
   }
 
-  @Override
   public void retain(int itemCount) {
     target.retain(itemCount);
   }
 
-  @Override
   public void characters(String chars) {
     target.deleteCharacters(chars);
   }
 
-  @Override
   public void elementStart(String type, Attributes attrs) {
     target.deleteElementStart(type, attrs);
   }
 
-  @Override
   public void elementEnd() {
     target.deleteElementEnd();
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     target.characters(chars);
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attrs) {
     target.elementStart(type, attrs);
   }
 
-  @Override
   public void deleteElementEnd() {
     target.elementEnd();
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     target.replaceAttributes(newAttrs, oldAttrs);
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attrUpdate) {
     AttributesUpdate update = new AttributesUpdateImpl();
     // TODO: This is a little silly. We should do this a better way.
@@ -95,38 +85,31 @@ public final class DocOpInverter<T> implements EvaluatingDocOpCursor<T> {
     target.updateAttributes(update);
   }
 
-  @Override
   public void annotationBoundary(final AnnotationBoundaryMap map) {
     // Warning: Performing multiple reversals can cause multiple wrappers to be created.
     // TODO: Maybe we should change this so that this issue doesn't occur.
     target.annotationBoundary(new AnnotationBoundaryMap() {
 
-      @Override
       public int changeSize() {
         return map.changeSize();
       }
 
-      @Override
       public String getChangeKey(int changeIndex) {
         return map.getChangeKey(changeIndex);
       }
 
-      @Override
       public String getOldValue(int changeIndex) {
         return map.getNewValue(changeIndex);
       }
 
-      @Override
       public String getNewValue(int changeIndex) {
         return map.getOldValue(changeIndex);
       }
 
-      @Override
       public int endSize() {
         return map.endSize();
       }
 
-      @Override
       public String getEndKey(int endIndex) {
         return map.getEndKey(endIndex);
       }

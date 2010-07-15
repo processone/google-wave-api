@@ -33,14 +33,12 @@ public final class CopyOnWriteSet<T> implements Iterable<T> {
   }
 
   private final static CollectionFactory HASH_SET = new CollectionFactory() {
-    @Override
     public <T> Collection<T> copy(Collection<T> source) {
       return CollectionUtils.newHashSet(source);
     }
   };
 
   private final static CollectionFactory LIST_SET = new CollectionFactory() {
-    @Override
     public <T> Collection<T> copy(Collection<T> source) {
       return CollectionUtils.newArrayList(source);
     }
@@ -131,7 +129,6 @@ public final class CopyOnWriteSet<T> implements Iterable<T> {
     return contents.contains(o);
   }
 
-  @Override
   public Iterator<T> iterator() {
     stale = true;
     return contents.iterator();

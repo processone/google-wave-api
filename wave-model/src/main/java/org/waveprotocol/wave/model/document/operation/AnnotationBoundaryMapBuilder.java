@@ -60,7 +60,7 @@ public final class AnnotationBoundaryMapBuilder {
   }
 
   private static Comparator<Triplet> TRIPLET_COMPARATOR = new Comparator<Triplet>() {
-    @Override
+	  
     public int compare(Triplet a, Triplet b) {
       return a.key.compareTo(b.key);
     }
@@ -75,32 +75,26 @@ public final class AnnotationBoundaryMapBuilder {
       this.changes = changes;
     }
 
-    @Override
     public int changeSize() {
       return changes.length;
     }
 
-    @Override
     public int endSize() {
       return ends.length;
     }
 
-    @Override
     public String getChangeKey(int i) {
       return changes[i].key;
     }
 
-    @Override
     public String getEndKey(int i) {
       return ends[i];
     }
 
-    @Override
     public String getNewValue(int i) {
       return changes[i].newValue;
     }
 
-    @Override
     public String getOldValue(int i) {
       return changes[i].oldValue;
     }
@@ -116,14 +110,14 @@ public final class AnnotationBoundaryMapBuilder {
     final Triplet[] changes = new Triplet[this.changes.countEntries()];
     endKeys.each(new Proc() {
       int i = 0;
-      @Override
+      
       public void apply(String key) {
         ends[i] = key;
         i++;
       }});
     this.changes.each(new ProcV<Pair<String, String>> () {
       int i = 0;
-      @Override
+      
       public void apply(String key, Pair<String, String> value) {
         changes[i] = new Triplet(key, value.first, value.second);
         i++;

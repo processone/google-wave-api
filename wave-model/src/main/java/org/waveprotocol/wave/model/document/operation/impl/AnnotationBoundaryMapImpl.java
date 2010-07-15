@@ -162,37 +162,30 @@ public class AnnotationBoundaryMapImpl implements AnnotationBoundaryMap {
     }
   }
 
-  @Override
   public int changeSize() {
     return changeKeys.length;
   }
 
-  @Override
   public int endSize() {
     return endKeys.length;
   }
 
-  @Override
   public String getChangeKey(int changeIndex) {
     return changeKeys[changeIndex];
   }
 
-  @Override
   public String getNewValue(int changeIndex) {
     return changeNewValues[changeIndex];
   }
 
-  @Override
   public String getOldValue(int changeIndex) {
     return changeOldValues[changeIndex];
   }
 
-  @Override
   public String getEndKey(int endIndex) {
     return endKeys[endIndex];
   }
 
-  @Override
   public String toString() {
     return DocOpUtil.toConciseString(this);
   }

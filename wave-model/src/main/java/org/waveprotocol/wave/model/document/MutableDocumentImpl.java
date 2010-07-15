@@ -115,7 +115,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public void insertText(int location, String text) {
     Preconditions.checkPositionIndex(location, size());
 
@@ -143,7 +142,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     insertText(doc.getLocation(point), text);
   }
 
-  @Override
   public E appendXml(XmlStringBuilder xml) {
     return insertXml(Point.<N>end(doc.getDocumentElement()), xml);
   }
@@ -176,7 +174,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public E insertXml(Point<N> point, XmlStringBuilder xml) {
     Point.checkPoint(this, point, "MutableDocumentImpl.insertXml");
 
@@ -203,7 +200,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public Range deleteRange(int start, int end) {
     Preconditions.checkPositionIndexes(start, end, size());
     // TODO(davidbyttow/danilatos): Handle this more efficiently.
@@ -340,7 +336,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public void setElementAttribute(E element, String name, String value) {
     String currentValue = getAttribute(element, name);
     if ((value == null && currentValue == null) || (value != null && value.equals(currentValue))) {
@@ -355,7 +350,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public void setElementAttributes(E element, Attributes attrs) {
     Preconditions.checkArgument(element != getDocumentElement(), "Cannot touch root element");
     try {
@@ -366,7 +360,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public void updateElementAttributes(E element, Map<String, String> attrs) {
     Preconditions.checkArgument(element != getDocumentElement(), "Cannot touch root element");
     try {
@@ -377,12 +370,10 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public E createChildElement(E parent, String tag, Map<String, String> attrs) {
     return createElement(Point.<N>end(parent), tag, attrs);
   }
 
-  @Override
   public E createElement(Point<N> point, String tagName, Map<String, String> attributes) {
     // TODO(danilatos): Validate point is in document. indexed doc should throw an exception
     // when calling getLocation anyway.
@@ -403,7 +394,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     }
   }
 
-  @Override
   public void setAnnotation(int start, int end, String key, String value) {
     Annotations.checkPersistentKey(key);
     Preconditions.checkPositionIndexes(start, end, doc.size());
@@ -419,7 +409,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
 
   }
 
-  @Override
   public void resetAnnotation(int start, int end, String key, String value) {
     Annotations.checkPersistentKey(key);
     Preconditions.checkPositionIndexes(start, end, doc.size());
@@ -447,7 +436,6 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
 
   @SuppressWarnings("deprecation")
   @Deprecated
-  @Override
   public void resetAnnotationsInRange(int rangeStart, int rangeEnd, String key,
       List<RangedValue<String>> values) {
     if (rangeStart == rangeEnd) {
@@ -601,12 +589,10 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
     return builder;
   }
 
-  @Override
   public void with(Action actionToRunWithDocument) {
     actionToRunWithDocument.exec(this);
   }
 
-  @Override
   public <V> V with(Method<V> methodToRunWithDocument) {
     return methodToRunWithDocument.exec(this);
   }
@@ -622,154 +608,124 @@ public class MutableDocumentImpl<N, E extends N, T extends N> implements Mutable
 
   // Eclipse-generated delegator methods
 
-  @Override
   public int size() {
     return doc.size();
   }
 
-  @Override
   public E asElement(N node) {
     return doc.asElement(node);
   }
 
-  @Override
   public T asText(N node) {
     return doc.asText(node);
   }
 
-  @Override
   public Map<String, String> getAttributes(E element) {
     return doc.getAttributes(element);
   }
 
-  @Override
   public String getData(T textNode) {
     return doc.getData(textNode);
   }
 
-  @Override
   public E getDocumentElement() {
     return doc.getDocumentElement();
   }
 
-  @Override
   public N getFirstChild(N node) {
     return doc.getFirstChild(node);
   }
 
-  @Override
   public N getLastChild(N node) {
     return doc.getLastChild(node);
   }
 
-  @Override
   public int getLength(T textNode) {
     return doc.getLength(textNode);
   }
 
-  @Override
   public N getNextSibling(N node) {
     return doc.getNextSibling(node);
   }
 
-  @Override
   public short getNodeType(N node) {
     return doc.getNodeType(node);
   }
 
-  @Override
   public E getParentElement(N node) {
     return doc.getParentElement(node);
   }
 
-  @Override
   public N getPreviousSibling(N node) {
     return doc.getPreviousSibling(node);
   }
 
-  @Override
   public String getTagName(E element) {
     return doc.getTagName(element);
   }
 
-  @Override
   public boolean isSameNode(N node, N other) {
     return doc.isSameNode(node, other);
   }
 
-  @Override
   public String getAttribute(E element, String name) {
     return doc.getAttribute(element, name);
   }
 
-  @Override
   public int firstAnnotationChange(int start, int end, String key, String fromValue) {
     return doc.firstAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public int lastAnnotationChange(int start, int end, String key, String fromValue) {
     return doc.lastAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public String getAnnotation(int start, String key) {
     return doc.getAnnotation(start, key);
   }
 
-  @Override
   public AnnotationCursor annotationCursor(int start, int end, ReadableStringSet keys) {
     return doc.annotationCursor(start, end, keys);
   }
 
-  @Override
   public Point<N> locate(int location) {
     return doc.locate(location);
   }
 
-  @Override
   public int getLocation(N node) {
     return doc.getLocation(node);
   }
 
-  @Override
   public int getLocation(Point<N> point) {
     return doc.getLocation(point);
   }
 
-  @Override
   public void forEachAnnotationAt(int location, ReadableStringMap.ProcV<String> callback) {
     doc.forEachAnnotationAt(location, callback);
   }
 
-  @Override
   public Iterable<AnnotationInterval<String>> annotationIntervals(int start, int end,
       ReadableStringSet keys) {
     return doc.annotationIntervals(start, end, keys);
   }
 
-  @Override
   public Iterable<RangedAnnotation<String>> rangedAnnotations(int start, int end,
       ReadableStringSet keys) {
     return doc.rangedAnnotations(start, end, keys);
   }
 
-  @Override
   public ReadableStringSet knownKeys() {
     return doc.knownKeys();
   }
 
-  @Override
   public DocInitialization toInitialization() {
     return doc.toInitialization();
   }
 
-  @Override
   public String toXmlString() {
     return doc.toXmlString();
   }
 
-  @Override
   public String toString() {
     return doc.toString();
   }

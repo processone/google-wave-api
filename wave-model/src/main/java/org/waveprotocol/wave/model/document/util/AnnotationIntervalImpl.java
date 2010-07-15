@@ -49,27 +49,22 @@ public final class AnnotationIntervalImpl<V> implements AnnotationInterval<V> {
     this.diffFromLeft = diffFromPrevious;
   }
 
-  @Override
   public int start() {
     return start;
   }
 
-  @Override
   public int end() {
     return end;
   }
 
-  @Override
   public int length() {
     return end - start;
   }
 
-  @Override
   public ReadableStringMap<V> annotations() {
     return annotations;
   }
 
-  @Override
   public ReadableStringMap<V> diffFromLeft() {
     return diffFromLeft;
   }
@@ -78,7 +73,7 @@ public final class AnnotationIntervalImpl<V> implements AnnotationInterval<V> {
     final StringBuilder buf = new StringBuilder("{");
     final boolean first[] = new boolean[] { true };
     map.each(new ReadableStringMap.ProcV<V>() {
-      @Override
+    	
       public void apply(String key, V value) {
         if (first[0]) {
           first[0] = false;

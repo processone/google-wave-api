@@ -166,7 +166,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     queuedNotifications.add(n);
   }
 
-  @Override
   public void begin(boolean needReverseOp) {
     if (cursor != -1) {
       throw new IllegalStateException("begin() called twice with no finish() in between");
@@ -222,7 +221,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     // very smart.
 
     Collections.sort(events, new Comparator<AnnotationEvent>() {
-      @Override
+    	
       public int compare(AnnotationEvent o1, AnnotationEvent o2) {
         if (o1.index < o2.index) {
           return -1;
@@ -294,11 +293,10 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
 ////    return b;
 //  }
 
-  @Override
   public void finish() {
     if (!openAnnotations.isEmpty()) {
       openAnnotations.each(new ReadableStringMap.ProcV<OpenAnnotation>() {
-        @Override
+    	  
         public void apply(String key, OpenAnnotation openAnnotation) {
           throw new IllegalStateException("finish() called while annotations are still open: "
               + openAnnotation);
@@ -362,7 +360,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     collectAllAnnotationsAt(position, inheritedAnnotationsForInsertion);
   }
 
-  @Override
   public void skip(int distance) {
     assert cursor != -1;
     assert distance > 0;
@@ -381,7 +378,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     updateInheritedAnnotationsFromPosition(cursor - 1);
   }
 
-  @Override
   public void delete(int deleteSize) {
     assert cursor != -1;
     assert deleteSize > 0;
@@ -399,7 +395,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     tree.delete(cursor, cursor + deleteSize);
   }
 
-  @Override
   public void insert(int insertSize) {
     assert cursor != -1;
     assert insertSize > 0;
@@ -407,7 +402,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     final int start = cursor;
     final int end = cursor + insertSize;
     inheritedAnnotationsForInsertion.each(new StringMap.ProcV<V>() {
-      @Override
+    	
       public void apply(String key, V value) {
         if (!openAnnotations.containsKey(key)) {
           tree.setAnnotation(start, end, key, value);
@@ -421,7 +416,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     // need for this and thus allow us to clean up known keys in
     // setAnnotation().
     tree.knownKeys.each(new StringSet.Proc() {
-      @Override
+    	
       public void apply(String key) {
         if (!inheritedAnnotationsForInsertion.containsKey(key)
             && !openAnnotations.containsKey(key)) {
@@ -432,7 +427,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     cursor += insertSize;
   }
 
-  @Override
   public String getInherited(String key) {
     if (shouldRecordReverseOpsForKey(key)) {
       return (String) inheritedAnnotationsForInsertion.get(key, null);
@@ -441,7 +435,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     }
   }
 
-  @Override
   public void startAnnotation(String key, V value) {
     assert cursor != -1;
     assert key != null;
@@ -459,7 +452,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     openAnnotations.put(key, new OpenAnnotation(cursor, key, value));
   }
 
-  @Override
   public void endAnnotation(String key) {
     assert cursor != -1;
     assert key != null;
@@ -476,39 +468,33 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     queueNotification(a.start, end, a.key, a.value);
   }
 
-  @Override
   public int size() {
     return tree.length();
   }
 
-  @Override
   public V getAnnotation(int location, String key) {
     Preconditions.checkElementIndex(location, size());
     checkKeyNotNull(key);
     return tree.getAnnotation(location, key);
   }
 
-  @Override
   public int firstAnnotationChange(int start, int end, String key, V fromValue) {
     Preconditions.checkPositionIndexes(start, end, size());
     checkKeyNotNull(key);
     return tree.firstAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public int lastAnnotationChange(int start, int end, String key, V fromValue) {
     Preconditions.checkPositionIndexes(start, end, size());
     checkKeyNotNull(key);
     return tree.lastAnnotationChange(start, end, key, fromValue);
   }
 
-  @Override
   public void forEachAnnotationAt(int index, ReadableStringMap.ProcV<V> callback) {
     Preconditions.checkElementIndex(index, size());
     tree.forEachAnnotationAt(index, callback);
   }
 
-  @Override
   public AnnotationCursor annotationCursor(int start, int end, ReadableStringSet keys) {
     Preconditions.checkPositionIndexes(start, end, size());
     if (keys == null) {
@@ -525,7 +511,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
    * may be that the item to the left of start() of the first interval returned
    * actually has the same annotations.
    */
-  @Override
   public Iterable<AnnotationInterval<V>> annotationIntervals(int start, int end,
       ReadableStringSet keys) {
     Preconditions.checkPositionIndexes(start, end, size());
@@ -536,7 +521,6 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     }
   }
 
-  @Override
   public Iterable<RangedAnnotation<V>> rangedAnnotations(int start, int end,
       ReadableStringSet keys) {
     Preconditions.checkPositionIndexes(start, end, size());
@@ -546,12 +530,10 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     return new GenericRangedAnnotationIterable<V>(this, start, end, keys);
   }
 
-  @Override
   public ReadableStringSet knownKeys() {
     return CollectionUtils.copyStringSet(tree.knownKeys);
   }
 
-  @Override
   public ReadableStringSet knownKeysLive() {
     return tree.knownKeys;
   }
@@ -564,7 +546,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
     final StringBuilder buf = new StringBuilder("{");
     final boolean first[] = new boolean[] { true };
     map.each(new StringMap.ProcV<V>() {
-      @Override
+    	
       public void apply(String key, V value) {
         if (first[0]) {
           first[0] = false;
@@ -958,7 +940,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
           left.checkPropagationAndMerging();
           right.checkPropagationAndMerging();
           left.localMap.each(new StringMap.ProcV<V>() {
-            @Override
+        	  
             public void apply(String key, V valueLeft) {
               if (right.localMap.containsKey(key)) {
                 V valueRight = right.localMap.getExisting(key);
@@ -985,7 +967,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
       void checkNoStaleKeys() {
         if (!isRoot()) {
           localMap.each(new StringMap.ProcV<V>() {
-            @Override
+        	  
             public void apply(String key, V value) {
               // The key must not be set in any ancestor.
               for (Node ancestor = Node.this; ancestor != root();
@@ -1326,7 +1308,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
       void tryToPropagateFromChildren(ReadableStringMap<V> entries) {
         assert !isLeaf();
         entries.each(new StringMap.ProcV<V>() {
-          @Override
+        	
           public void apply(String key, V value) {
             tryToPropagateFromChildren(key);
           }
@@ -1459,7 +1441,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
       // d = (d minus b) union (c minus (b minus d)); e = e union c, b = (b minus d) minus c
       final StringMap<V> a1 = factory.createStringMap();
       d0.filter(new StringMap.EntryFilter<V>() {
-        @Override
+    	  
         public boolean apply(String key, V value) {
           if (b0.containsKey(key) && valuesEqual(b0.getExisting(key), value)) {
             a1.put(key, value);
@@ -1470,7 +1452,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
         }
       });
       c0.each(new StringMap.ProcV<V>() {
-        @Override
+    	  
         public void apply(String key, V value) {
           if (b0.containsKey(key) && valuesEqual(b0.getExisting(key), value)) {
             b0.remove(key);
@@ -1762,7 +1744,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
         return;
       }
       root().localMap.filter(new StringMap.EntryFilter<V>() {
-          @Override
+    	  
           public boolean apply(String key, V value) {
             if (value == null) {
               knownKeys.remove(key);
@@ -1956,7 +1938,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
         assert i.start() < end;
         final int realStart = Math.max(start, i.start());
         i.annotations().each(new ReadableStringMap.ProcV<V>() {
-          @Override
+        	
           public void apply(String key, V value) {
             if (shouldRecordReverseOpsForKey(key)) {
               assert value == null || value instanceof String;
@@ -1970,7 +1952,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
 
       // Produce endAnnotation calls for every annotation at the end.
       open.each(new StringSet.Proc() {
-        @Override
+    	  
         public void apply(String key) {
           reverseOpEventsFromDeletions.add(new AnnotationEndEvent(end + itemsDeletedThisRun, key));
         }
@@ -2086,7 +2068,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
       // Check that position 0 exists and has only annotations with the value null.
       checkState(root().subtreeLength >= 1);
       knownKeys.each(new StringSet.Proc() {
-        @Override
+    	  
         public void apply(String key) {
           checkState(valuesEqual(getAnnotationRaw(0, key), null));
         }
@@ -2095,7 +2077,7 @@ public class AnnotationTree<V> implements RawAnnotationSet<V> {
 
     void checkKnownKeysSetEverywhere() {
       knownKeys.each(new StringSet.Proc() {
-        @Override
+    	  
         public void apply(String key) {
           root().checkKeyCoverage(key);
         }

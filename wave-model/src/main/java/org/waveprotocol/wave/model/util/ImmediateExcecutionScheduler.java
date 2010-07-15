@@ -9,12 +9,10 @@ package org.waveprotocol.wave.model.util;
  */
 public class ImmediateExcecutionScheduler implements Scheduler {
 
-  @Override
   public void reset() {
     // Do nothing.
   }
 
-  @Override
   public void schedule(Command task) {
     task.execute();
   }

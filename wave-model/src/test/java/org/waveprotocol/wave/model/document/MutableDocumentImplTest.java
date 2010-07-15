@@ -47,7 +47,6 @@ public class MutableDocumentImplTest extends TestCase {
       return DocProviders.POJO.parse(innerXml);
     }
 
-    @Override
     public IndexedDocument<Node, Element, Text> copyDocument(
         IndexedDocument<Node, Element, Text> other) {
       return DocProviders.POJO.build(other.asOperation(), DocumentSchema.NO_SCHEMA_CONSTRAINTS);
@@ -72,15 +71,12 @@ public class MutableDocumentImplTest extends TestCase {
   OperationSequencer<Nindo> createSequencer(
       final IndexedDocument<Node, Element, Text> document) {
     return new OperationSequencer<Nindo>() {
-      @Override
       public void begin() {
       }
 
-      @Override
       public void end() {
       }
 
-      @Override
       public void consume(Nindo op) {
         try {
           latestOp = document.consumeAndReturnInvertible(op);

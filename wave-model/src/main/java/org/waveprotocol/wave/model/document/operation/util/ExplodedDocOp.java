@@ -46,61 +46,51 @@ public class ExplodedDocOp implements DocOp {
     this.source = source;
   }
 
-  @Override
   public void apply(final DocOpCursor target) {
     source.apply(new DocOpCursor() {
-      @Override
+    	
       public void deleteCharacters(String chars) {
         for (int i = 0; i < chars.length(); i++) {
           target.deleteCharacters(chars.substring(i, i + 1));
         }
       }
 
-      @Override
       public void deleteElementEnd() {
         target.deleteElementEnd();
       }
 
-      @Override
       public void deleteElementStart(String type, Attributes attrs) {
         target.deleteElementStart(type, attrs);
       }
 
-      @Override
       public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
         target.replaceAttributes(oldAttrs, newAttrs);
       }
 
-      @Override
       public void retain(int itemCount) {
         for (int i = 0; i < itemCount; i++) {
           target.retain(1);
         }
       }
 
-      @Override
       public void updateAttributes(AttributesUpdate attrUpdate) {
         target.updateAttributes(attrUpdate);
       }
 
-      @Override
       public void annotationBoundary(AnnotationBoundaryMap map) {
         target.annotationBoundary(map);
       }
 
-      @Override
       public void characters(String chars) {
         for (int i = 0; i < chars.length(); i++) {
           target.characters(chars.substring(i, i + 1));
         }
       }
 
-      @Override
       public void elementEnd() {
         target.elementEnd();
       }
 
-      @Override
       public void elementStart(String type, Attributes attrs) {
         target.elementStart(type, attrs);
       }

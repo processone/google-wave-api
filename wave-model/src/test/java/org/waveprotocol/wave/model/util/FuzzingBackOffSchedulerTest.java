@@ -18,7 +18,6 @@ public class FuzzingBackOffSchedulerTest extends TestCase {
   private class FakeCancellable implements Cancellable {
     boolean cancelled;
 
-    @Override
     public void cancel() {
       cancelled = true;
     }
@@ -30,7 +29,6 @@ public class FuzzingBackOffSchedulerTest extends TestCase {
     FakeCancellable cancellable;
     int millisec;
 
-    @Override
     public Cancellable schedule(Command command, int millisec, int window) {
       this.millisec = millisec;
       this.command = command;
@@ -46,7 +44,6 @@ public class FuzzingBackOffSchedulerTest extends TestCase {
   @Override
   protected void setUp() {
     fakeComamnd = new Command() {
-      @Override
       public void execute() {
       }
     };

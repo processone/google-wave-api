@@ -89,30 +89,25 @@ public final class Composer {
 
   private abstract class PreTarget extends Target {
 
-    @Override
     public final void deleteCharacters(String chars) {
       preAnnotationQueue.flush();
       normalizer.deleteCharacters(chars);
     }
 
-    @Override
     public final void deleteElementStart(String type, Attributes attrs) {
       preAnnotationQueue.flush();
       normalizer.deleteElementStart(type, attrs);
     }
 
-    @Override
     public final void deleteElementEnd() {
       preAnnotationQueue.flush();
       normalizer.deleteElementEnd();
     }
 
-    @Override
     public final void annotationBoundary(AnnotationBoundaryMap map) {
       preAnnotationQueue.queue(map);
     }
 
-    @Override
     final boolean isPostTarget() {
       return false;
     }
@@ -121,30 +116,25 @@ public final class Composer {
 
   private abstract class PostTarget extends Target {
 
-    @Override
     public final void characters(String chars) {
       postAnnotationQueue.flush();
       normalizer.characters(chars);
     }
 
-    @Override
     public final void elementStart(String type, Attributes attrs) {
       postAnnotationQueue.flush();
       normalizer.elementStart(type, attrs);
     }
 
-    @Override
     public final void elementEnd() {
       postAnnotationQueue.flush();
       normalizer.elementEnd();
     }
 
-    @Override
     public final void annotationBoundary(AnnotationBoundaryMap map) {
       postAnnotationQueue.queue(map);
     }
 
-    @Override
     final boolean isPostTarget() {
       return true;
     }
@@ -153,32 +143,26 @@ public final class Composer {
 
   private final class DefaultPreTarget extends PreTarget {
 
-    @Override
     public void retain(int itemCount) {
       target = new RetainPostTarget(itemCount);
     }
 
-    @Override
     public void characters(String chars) {
       target = new CharactersPostTarget(chars);
     }
 
-    @Override
     public void elementStart(String type, Attributes attrs) {
       target = new ElementStartPostTarget(type, attrs);
     }
 
-    @Override
     public void elementEnd() {
       target = new ElementEndPostTarget();
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       target = new ReplaceAttributesPostTarget(oldAttrs, newAttrs);
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       target = new UpdateAttributesPostTarget(attrUpdate);
     }
@@ -193,7 +177,6 @@ public final class Composer {
       this.itemCount = itemCount;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       if (itemCount <= this.itemCount) {
@@ -205,7 +188,6 @@ public final class Composer {
       }
     }
 
-    @Override
     public void characters(String chars) {
       flushAnnotations();
       if (chars.length() <= itemCount) {
@@ -217,28 +199,24 @@ public final class Composer {
       }
     }
 
-    @Override
     public void elementStart(String type, Attributes attrs) {
       flushAnnotations();
       normalizer.elementStart(type, attrs);
       cancelRetain(1);
     }
 
-    @Override
     public void elementEnd() {
       flushAnnotations();
       normalizer.elementEnd();
       cancelRetain(1);
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       flushAnnotations();
       normalizer.replaceAttributes(oldAttrs, newAttrs);
       cancelRetain(1);
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrsUpdate) {
       flushAnnotations();
       normalizer.updateAttributes(attrsUpdate);
@@ -263,7 +241,6 @@ public final class Composer {
       this.chars = chars;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       if (itemCount <= chars.length()) {
@@ -275,7 +252,6 @@ public final class Composer {
       }
     }
 
-    @Override
     public void characters(String chars) {
       flushAnnotations();
       if (chars.length() <= this.chars.length()) {
@@ -285,22 +261,18 @@ public final class Composer {
       }
     }
 
-    @Override
     public void elementStart(String type, Attributes attrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void elementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       throw new ComposeException("Illegal composition");
     }
@@ -323,7 +295,6 @@ public final class Composer {
       this.itemCount = itemCount;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       if (itemCount <= this.itemCount) {
@@ -335,7 +306,6 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       flushAnnotations();
       if (chars.length() <= itemCount) {
@@ -347,28 +317,24 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       flushAnnotations();
       normalizer.deleteElementStart(type, attrs);
       cancelRetain(1);
     }
 
-    @Override
     public void deleteElementEnd() {
       flushAnnotations();
       normalizer.deleteElementEnd();
       cancelRetain(1);
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       flushAnnotations();
       normalizer.replaceAttributes(oldAttrs, newAttrs);
       cancelRetain(1);
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       flushAnnotations();
       normalizer.updateAttributes(attrUpdate);
@@ -393,7 +359,6 @@ public final class Composer {
       this.chars = chars;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       if (itemCount <= chars.length()) {
@@ -405,7 +370,6 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       flushAnnotations();
       if (chars.length() <= this.chars.length()) {
@@ -415,22 +379,18 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       throw new ComposeException("Illegal composition");
     }
@@ -455,7 +415,6 @@ public final class Composer {
       this.attrs = attrs;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       normalizer.elementStart(type, attrs);
@@ -466,30 +425,25 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       flushAnnotations();
       target = defaultTarget;
     }
 
-    @Override
     public void deleteElementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       flushAnnotations();
       normalizer.elementStart(type, newAttrs);
       target = defaultTarget;
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       flushAnnotations();
       normalizer.elementStart(type, attrs.updateWith(attrUpdate));
@@ -500,7 +454,6 @@ public final class Composer {
 
   private final class ElementEndPostTarget extends PostTarget {
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       normalizer.elementEnd();
@@ -511,28 +464,23 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementEnd() {
       flushAnnotations();
       target = defaultTarget;
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       throw new ComposeException("Illegal composition");
     }
@@ -549,7 +497,6 @@ public final class Composer {
       this.newAttrs = newAttrs;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       normalizer.replaceAttributes(oldAttrs, newAttrs);
@@ -560,31 +507,26 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       flushAnnotations();
       normalizer.deleteElementStart(type, oldAttrs);
       target = defaultTarget;
     }
 
-    @Override
     public void deleteElementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       flushAnnotations();
       normalizer.replaceAttributes(this.oldAttrs, newAttrs);
       target = defaultTarget;
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       flushAnnotations();
       normalizer.replaceAttributes(oldAttrs, newAttrs.updateWith(attrUpdate));
@@ -601,7 +543,6 @@ public final class Composer {
       this.attrUpdate = attrUpdate;
     }
 
-    @Override
     public void retain(int itemCount) {
       flushAnnotations();
       normalizer.updateAttributes(attrUpdate);
@@ -612,31 +553,26 @@ public final class Composer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       flushAnnotations();
       normalizer.deleteElementStart(type, attrs.updateWith(invertUpdate(attrUpdate)));
       target = defaultTarget;
     }
 
-    @Override
     public void deleteElementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       flushAnnotations();
       normalizer.replaceAttributes(oldAttrs.updateWith(invertUpdate(attrUpdate)), newAttrs);
       target = defaultTarget;
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       flushAnnotations();
       normalizer.updateAttributes(this.attrUpdate.composeWith(attrUpdate));
@@ -647,32 +583,26 @@ public final class Composer {
 
   private final class FinisherPostTarget extends PostTarget {
 
-    @Override
     public void retain(int itemCount) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementStart(String type, Attributes attrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void deleteElementEnd() {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       throw new ComposeException("Illegal composition");
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       throw new ComposeException("Illegal composition");
     }

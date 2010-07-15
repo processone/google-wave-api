@@ -25,7 +25,6 @@ public interface NindoSink {
    */
   public interface Silent extends NindoSink {
 
-    @Override
     BufferedDocOp consumeAndReturnInvertible(Nindo op);
   }
 }

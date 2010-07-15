@@ -31,24 +31,22 @@ public class Automatons {
 
     return new AutomatonDocument() {
 
-      @Override
       public AnnotationMap annotationsAt(final int pos) {
         Preconditions.checkElementIndex(pos, doc.size());
         class AnnoMap extends HashMap<String, String> implements AnnotationMap {
-          @Override
+        	
           public AnnotationMap updateWith(AnnotationsUpdate mutation) {
             return new AnnotationMapImpl(this).updateWith(mutation);
           }
 
-          @Override
           public AnnotationMap updateWithNoCompatibilityCheck(AnnotationsUpdate mutation) {
             return new AnnotationMapImpl(this).updateWithNoCompatibilityCheck(mutation);
           }
         }
         final AnnoMap annotations = new AnnoMap();
         doc.knownKeys().each(new Proc() {
-          @Override
-          public void apply(String key) {
+        	
+        	public void apply(String key) {
             String value = doc.getAnnotation(pos, key);
             if (value != null) {
               annotations.put(key, value);
@@ -58,36 +56,30 @@ public class Automatons {
         return annotations;
       }
 
-      @Override
       public Attributes attributesAt(int pos) {
         E el = Point.elementAfter(doc, doc.locate(pos));
         return isUsableElement(el) ? new AttributesImpl(doc.getAttributes(el)) : null;
       }
 
-      @Override
       public int charAt(int pos) {
         String str = DocHelper.getText(doc, pos, pos + 1);
         return str.length() > 0 ? str.charAt(0) : -1;
       }
 
-      @Override
       public String elementEndingAt(int pos) {
         E el = Point.elementEndingAt(doc, doc.locate(pos));
         return isUsableElement(el) ? doc.getTagName(el) : null;
       }
 
-      @Override
       public String elementStartingAt(int pos) {
         E el = Point.elementAfter(doc, doc.locate(pos));
         return isUsableElement(el) ? doc.getTagName(el) : null;
       }
 
-      @Override
       public int length() {
         return doc.size();
       }
 
-      @Override
       public String nthEnclosingElementTag(int insertionPoint, int depth) {
         E el = Point.enclosingElement(doc, doc.locate(insertionPoint));
         while (depth > 0 && isUsableElement(el)) {
@@ -98,7 +90,6 @@ public class Automatons {
       }
 
       @SuppressWarnings("unchecked")
-      @Override
       public int remainingCharactersInElement(int insertionPoint) {
         Point<N> point = doc.locate(insertionPoint);
         int num = 0;
@@ -121,12 +112,10 @@ public class Automatons {
         return element != null && element != doc.getDocumentElement();
       }
 
-      @Override
       public int firstAnnotationChange(int start, int end, String key, String fromValue) {
         return doc.firstAnnotationChange(start, end, key, fromValue);
       }
 
-      @Override
       public String getAnnotation(int pos, String key) {
         return doc.getAnnotation(pos, key);
       }

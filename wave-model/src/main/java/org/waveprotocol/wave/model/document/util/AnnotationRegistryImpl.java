@@ -37,14 +37,12 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
    *
    * TODO(user): Consider more efficient propagation of changes to children.
    */
-  @Override
   public AnnotationRegistryImpl createExtension() {
     AnnotationRegistryImpl child = new AnnotationRegistryImpl(this);
     children.add(child);
     return child;
   }
 
-  @Override
   public void registerHandler(String prefix, AnnotationMutationHandler handler) {
     Util.validatePrefix(prefix);
     handlers.put(prefix, handler);
@@ -53,7 +51,6 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
     }
   }
 
-  @Override
   public void registerBehaviour(String prefix, AnnotationBehaviour behaviour) {
     Util.validatePrefix(prefix);
     behaviours.put(prefix, behaviour);
@@ -62,7 +59,6 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
     }
   }
 
-  @Override
   public Iterator<AnnotationMutationHandler> getHandlers(final String prefix) {
     final String parts = prefix + "/";
 
@@ -74,12 +70,10 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
         getNext();
       }
 
-      @Override
       public boolean hasNext() {
         return next != null;
       }
 
-      @Override
       public AnnotationMutationHandler next() {
         AnnotationMutationHandler ret = next;
         getNext();
@@ -97,14 +91,12 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
         next = null;
       }
 
-      @Override
       public void remove() {
         throw new UnsupportedOperationException("getHandlers iterator: remove");
       }
     };
   }
 
-  @Override
   public Iterator<AnnotationBehaviour> getBehaviours(final String prefix) {
     final String parts = prefix + "/";
 
@@ -116,12 +108,10 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
         getNext();
       }
 
-      @Override
       public boolean hasNext() {
         return next != null;
       }
 
-      @Override
       public AnnotationBehaviour next() {
         AnnotationBehaviour ret = next;
         getNext();
@@ -139,7 +129,6 @@ public class AnnotationRegistryImpl implements AnnotationRegistry {
         next = null;
       }
 
-      @Override
       public void remove() {
         throw new UnsupportedOperationException("getBehaviours iterator: remove");
       }

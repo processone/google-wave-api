@@ -36,7 +36,6 @@ public final class TextLocator {
       this.characters = characters;
     }
 
-    @Override
     public int indexOf(String data, int start, boolean forward) {
       return forward ? data.indexOf(characters, start) : data.lastIndexOf(characters, start);
     }
@@ -67,7 +66,6 @@ public final class TextLocator {
       return -1;
     }
 
-    @Override
     public int indexOf(String data, int start, boolean forward) {
       return forward ? findForwards(data, start) : findBackwards(data, start);
     }
@@ -79,7 +77,6 @@ public final class TextLocator {
   private static final CharacterLocator wordCharactersBoundaryLocator =
       new PredicateBoundaryLocator(new CharacterPredicate() {
 
-        @Override
         public boolean apply(char c) {
           return isWordCharacter(c);
         }
@@ -91,7 +88,6 @@ public final class TextLocator {
   private static final CharacterLocator nonWordCharactersBoundaryLocator =
     new PredicateBoundaryLocator(new CharacterPredicate() {
 
-      @Override
       public boolean apply(char c) {
         return !isWordCharacter(c);
       }
@@ -111,7 +107,6 @@ public final class TextLocator {
    * Predicate that matches inline whitespace characters.
    */
   public static final CharacterPredicate WHITESPACE_MATCHER = new CharacterPredicate() {
-    @Override
     public boolean apply(char c) {
       return isInlineWhitespace(c);
     }
@@ -121,7 +116,6 @@ public final class TextLocator {
    * Predicate that matches non-inline whitespace characters.
    */
   public static final CharacterPredicate NON_WHITESPACE_MATCHER = new CharacterPredicate() {
-    @Override
     public boolean apply(char c) {
       return !isInlineWhitespace(c);
     }

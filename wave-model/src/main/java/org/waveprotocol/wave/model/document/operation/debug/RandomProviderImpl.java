@@ -39,12 +39,10 @@ public class RandomProviderImpl implements RandomProvider {
     this.random = new Random(seed);
   }
 
-  @Override
   public boolean nextBoolean() {
     return random.nextBoolean();
   }
 
-  @Override
   public int nextInt(int upperBound) {
     return random.nextInt(upperBound);
   }

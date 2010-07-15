@@ -1,5 +1,4 @@
 /**
- * Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,64 +120,53 @@ public final class RangeNormalizer<T> implements EvaluatingDocOpCursor<T> {
     this.target = target;
   }
 
-  @Override
   public T finish() {
     cache.flush();
     return target.finish();
   }
 
-  @Override
   public void retain(int itemCount) {
     cache.skip(itemCount);
   }
 
-  @Override
   public void characters(String chars) {
     cache.characters(chars);
   }
 
-  @Override
   public void elementStart(String type, Attributes attrs) {
     cache.flush();
     target.elementStart(type, attrs);
   }
 
-  @Override
   public void elementEnd() {
     cache.flush();
     target.elementEnd();
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     cache.deleteCharacters(chars);
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attrs) {
     cache.flush();
     target.deleteElementStart(type, attrs);
   }
 
-  @Override
   public void deleteElementEnd() {
     cache.flush();
     target.deleteElementEnd();
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     cache.flush();
     target.replaceAttributes(oldAttrs, newAttrs);
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attrUpdate) {
     cache.flush();
     target.updateAttributes(attrUpdate);
   }
 
-  @Override
   public void annotationBoundary(AnnotationBoundaryMap map) {
     cache.flush();
     target.annotationBoundary(map);

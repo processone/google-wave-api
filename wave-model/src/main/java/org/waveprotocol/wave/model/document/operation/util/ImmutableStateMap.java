@@ -67,17 +67,14 @@ public abstract class ImmutableStateMap<T extends ImmutableStateMap<T, U>, U ext
       this.value = value;
     }
 
-    @Override
     public String getKey() {
       return name;
     }
 
-    @Override
     public String getValue() {
       return value;
     }
 
-    @Override
     public String setValue(String value) {
       throw new UnsupportedOperationException("Attempt to modify an immutable map entry.");
     }
@@ -140,7 +137,7 @@ public abstract class ImmutableStateMap<T extends ImmutableStateMap<T, U>, U ext
   }
 
   protected static final Comparator<Attribute> comparator = new Comparator<Attribute>() {
-    @Override
+	  
     public int compare(Attribute a, Attribute b) {
       return a.name.compareTo(b.name);
     }

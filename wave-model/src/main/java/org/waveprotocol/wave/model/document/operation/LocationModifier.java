@@ -21,37 +21,30 @@ public class LocationModifier implements DocOpCursor {
     this.mutatingLocation = location;
   }
 
-  @Override
   public void retain(int itemCount) {
     scanPoint += itemCount;
   }
 
-  @Override
   public void characters(String characters) {
     insert(characters.length());
   }
 
-  @Override
   public void elementStart(String type, Attributes attributes) {
     insert(1);
   }
 
-  @Override
   public void elementEnd() {
     insert(1);
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     delete(chars.length());
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attributes) {
     delete(1);
   }
 
-  @Override
   public void deleteElementEnd() {
     delete(1);
   }
@@ -69,17 +62,14 @@ public class LocationModifier implements DocOpCursor {
     }
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttributes, Attributes newAttributes) {
     retain(1);
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attributesUpdate) {
     retain(1);
   }
 
-  @Override
   public void annotationBoundary(AnnotationBoundaryMap m) {}
 
   /**

@@ -63,17 +63,14 @@ public final class EventBundleImpl<N, E extends N, T extends N> implements Event
     this.inserted = inserted;
   }
 
-  @Override
   public Iterable<DocumentEvent<N, E, T>> getEventComponents() {
     return components;
   }
 
-  @Override
   public Collection<E> getDeletedElements() {
     return deleted;
   }
 
-  @Override
   public Collection<E> getInsertedElements() {
     return inserted;
   }

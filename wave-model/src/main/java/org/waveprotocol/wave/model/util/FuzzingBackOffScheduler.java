@@ -58,7 +58,6 @@ public class FuzzingBackOffScheduler implements Scheduler {
     this.scheduler = scheduler;
   }
 
-  @Override
   public void reset() {
     generator.reset();
     if (scheduledTask != null) {
@@ -67,7 +66,6 @@ public class FuzzingBackOffScheduler implements Scheduler {
     scheduledTask = null;
   }
 
-  @Override
   public void schedule(Command task) {
     if (scheduledTask != null) {
       scheduledTask.cancel();

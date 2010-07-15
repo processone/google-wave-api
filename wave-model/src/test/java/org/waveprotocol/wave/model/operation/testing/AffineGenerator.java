@@ -8,7 +8,6 @@ import org.waveprotocol.wave.model.operation.testing.RationalDomain.Affine;
 
 public class AffineGenerator implements RandomOpGenerator<RationalDomain.Data, Affine> {
 
-  @Override
   public Affine randomOperation(RationalDomain.Data state, Random random) {
     int neg1 = random.nextBoolean() ? -1 : 1;
     int neg2 = random.nextBoolean() ? -1 : 1;

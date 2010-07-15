@@ -331,7 +331,6 @@ public final class Transformer {
       this.characters = characters;
     }
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveDeleteCharacters(characters.substring(0, size));
     }
@@ -351,7 +350,6 @@ public final class Transformer {
       this.attributes = attributes;
     }
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveDeleteElementStart(type, attributes);
     }
@@ -371,7 +369,6 @@ public final class Transformer {
       this.newAttributes = newAttributes;
     }
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveReplaceAttributes(oldAttributes, newAttributes);
     }
@@ -389,7 +386,6 @@ public final class Transformer {
       this.update = update;
     }
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveUpdateAttributes(update);
     }
@@ -401,7 +397,6 @@ public final class Transformer {
    */
   private static final RangeResolver retainResolver = new RangeResolver() {
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveRetain(size);
     }
@@ -413,7 +408,6 @@ public final class Transformer {
    */
   private static final RangeResolver deleteElementEndResolver = new RangeResolver() {
 
-    @Override
     public void resolve(int size, RangeCache range) {
       range.resolveDeleteElementEnd();
     }
@@ -695,13 +689,11 @@ public final class Transformer {
       return targetDocument.finish();
     }
 
-    @Override
     public void retain(int itemCount) {
       resolveRange(itemCount, retainResolver);
       rangeCache = retainCache;
     }
 
-    @Override
     public void characters(String chars) {
       if (otherTarget.depth > 0) {
         otherTarget.annotationTracker.startDeletion();
@@ -714,7 +706,6 @@ public final class Transformer {
       }
     }
 
-    @Override
     public void elementStart(String tag, Attributes attrs) {
       if (otherTarget.depth > 0) {
         otherTarget.annotationTracker.startDeletion();
@@ -727,7 +718,6 @@ public final class Transformer {
       }
     }
 
-    @Override
     public void elementEnd() {
       if (otherTarget.depth > 0) {
         otherTarget.annotationTracker.startDeletion();
@@ -740,7 +730,6 @@ public final class Transformer {
       }
     }
 
-    @Override
     public void deleteCharacters(String chars) {
       int resolutionSize = resolveRange(chars.length(), new DeleteCharactersResolver(chars));
       if (resolutionSize >= 0) {
@@ -748,35 +737,30 @@ public final class Transformer {
       }
     }
 
-    @Override
     public void deleteElementStart(String tag, Attributes attrs) {
       if (resolveRange(1, new DeleteElementStartResolver(tag, attrs)) == 0) {
         rangeCache = new DeleteElementStartCache(tag, attrs);
       }
     }
 
-    @Override
     public void deleteElementEnd() {
       if (resolveRange(1, deleteElementEndResolver) == 0) {
         rangeCache = new DeleteElementEndCache();
       }
     }
 
-    @Override
     public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
       if (resolveRange(1, new ReplaceAttributesResolver(oldAttrs, newAttrs)) == 0) {
         rangeCache = new ReplaceAttributesCache(oldAttrs, newAttrs);
       }
     }
 
-    @Override
     public void updateAttributes(AttributesUpdate attrUpdate) {
       if (resolveRange(1, new UpdateAttributesResolver(attrUpdate)) == 0) {
         rangeCache = new UpdateAttributesCache(attrUpdate);
       }
     }
 
-    @Override
     public void annotationBoundary(AnnotationBoundaryMap map) {
       annotationTracker.buffer(map);
     }

@@ -24,52 +24,42 @@ public abstract class ModifiableDocumentAdapter implements DocOpCursor {
     this.target = target;
   }
 
-  @Override
   public void annotationBoundary(AnnotationBoundaryMap map) {
     target.annotationBoundary(map);
   }
 
-  @Override
   public void characters(String chars) {
     target.characters(chars);
   }
 
-  @Override
   public void deleteCharacters(String chars) {
     target.deleteCharacters(chars);
   }
 
-  @Override
   public void deleteElementEnd() {
     target.deleteElementEnd();
   }
 
-  @Override
   public void deleteElementStart(String type, Attributes attrs) {
     target.deleteElementStart(type, attrs);
   }
 
-  @Override
   public void elementEnd() {
     target.elementEnd();
   }
 
-  @Override
   public void elementStart(String type, Attributes attrs) {
     target.elementStart(type, attrs);
   }
 
-  @Override
   public void replaceAttributes(Attributes oldAttrs, Attributes newAttrs) {
     target.replaceAttributes(oldAttrs, newAttrs);
   }
 
-  @Override
   public void retain(int itemCount) {
     target.retain(itemCount);
   }
 
-  @Override
   public void updateAttributes(AttributesUpdate attrUpdate) {
     target.updateAttributes(attrUpdate);
   }

@@ -676,52 +676,43 @@ public final class DocOpAutomaton {
 
 
   public static final AutomatonDocument EMPTY_DOCUMENT = new AutomatonDocument() {
-    @Override
+	  
     public AnnotationMap annotationsAt(int pos) {
       return AnnotationMapImpl.EMPTY_MAP;
     }
 
-    @Override
     public Attributes attributesAt(int pos) {
       return null;
     }
 
-    @Override
     public int charAt(int pos) {
       return -1;
     }
 
-    @Override
     public String elementEndingAt(int pos) {
       return null;
     }
 
-    @Override
     public String elementStartingAt(int pos) {
       return null;
     }
 
-    @Override
     public int length() {
       return 0;
     }
 
-    @Override
     public String nthEnclosingElementTag(int insertionPoint, int depth) {
       return null;
     }
 
-    @Override
     public int remainingCharactersInElement(int insertionPoint) {
       return 0;
     }
 
-    @Override
     public String getAnnotation(int pos, String key) {
       return null;
     }
 
-    @Override
     public int firstAnnotationChange(int start, int end, String key, String fromValue) {
       Preconditions.checkPositionIndexes(start, end, 0);
       // if (fromValue != null && end > start): can't happen since end == start == 0
@@ -1096,7 +1087,7 @@ public final class DocOpAutomaton {
   public ValidationResult checkCharacters(String chars, ViolationCollector v) {
     // well-formedness
     if (chars == null) { return nullCharacters(v); }
-    if (chars.isEmpty()) { return emptyCharacters(v); }
+    if (chars.length() == 0) { return emptyCharacters(v); }
     if (Utf16Util.firstSurrogate(chars) != -1) { return charactersContainsSurrogate(v); }
     if (!Utf16Util.isValidUtf16(chars)) { return charactersInvalidUnicode(v); }
     if (!deletionStackIsEmpty()) { return insertInsideDelete(v); }
@@ -1326,7 +1317,7 @@ public final class DocOpAutomaton {
   public ValidationResult checkDeleteCharacters(String chars, ViolationCollector v) {
     // well-formedness
     if (chars == null) { return nullCharacters(v); }
-    if (chars.isEmpty()) { return emptyCharacters(v); }
+    if (chars.length() == 0) { return emptyCharacters(v); }
     if (Utf16Util.firstSurrogate(chars) != -1) { return deleteCharactersContainsSurrogate(v); }
     if (!Utf16Util.isValidUtf16(chars)) { return deleteCharactersInvalidUnicode(v); }
     if (!insertionStackIsEmpty()) { return deleteInsideInsert(v); }

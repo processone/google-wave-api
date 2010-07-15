@@ -40,7 +40,6 @@ public class DocumentListenerRegistry implements MutableDocumentListenerFactory 
    *
    * @return a forwarding listener, or null if no factories provided listeners.
    */
-  @Override
   public MutableDocumentListener createDocumentListener(String documentId) {
     final Set<MutableDocumentListener> listeners = new HashSet<MutableDocumentListener>();
     for (MutableDocumentListenerFactory factory : factories) {
@@ -67,7 +66,7 @@ public class DocumentListenerRegistry implements MutableDocumentListenerFactory 
    */
   private MutableDocumentListener forwardingListener(final Set<MutableDocumentListener> delegates) {
     return new MutableDocumentListener() {
-      @Override
+    	
       public void onDocumentEvents(MutableDocumentEvent events) {
         for (MutableDocumentListener listener : delegates) {
           listener.onDocumentEvents(events);

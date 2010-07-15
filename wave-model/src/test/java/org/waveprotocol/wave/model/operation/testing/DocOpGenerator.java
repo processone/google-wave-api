@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class DocOpGenerator implements RandomOpGenerator<BootstrapDocument, BufferedDocOp> {
 
-  @Override
   public BufferedDocOp randomOperation(BootstrapDocument state, Random random) {
     RandomProvider randomProvider = new RandomProviderImpl(random);
     EvaluatingDocOpCursor<BufferedDocOp> builder = new DocOpBuffer();

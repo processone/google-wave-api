@@ -408,12 +408,10 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
 
   // Reader methods
 
-  @Override
   public int size() {
     return ranges.size();
   }
 
-  @Override
   public Object getAnnotation(int location, String key) {
     Preconditions.checkElementIndex(location, size());
     checkKeyNotNull(key);
@@ -422,7 +420,6 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
     return values == null ? null : values.get(key);
   }
 
-  @Override
   public int firstAnnotationChange(int start, int end, String key, Object fromValue) {
     Preconditions.checkPositionIndexes(start, end, size());
     checkKeyNotNull(key);
@@ -451,7 +448,6 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
     return -1;
   }
 
-  @Override
   public int lastAnnotationChange(int start, int end, String key, Object fromValue) {
     Preconditions.checkPositionIndexes(start, end, size());
     checkKeyNotNull(key);
@@ -484,7 +480,6 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
     return -1;
   }
 
-  @Override
   public AnnotationCursor annotationCursor(int start, int end, ReadableStringSet keys) {
     if (keys == null) {
       throw new RuntimeException("not implemented");
@@ -506,7 +501,6 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
     Preconditions.checkNotNull(key, "key must not be null");
   }
 
-  @Override
   public void forEachAnnotationAt(int location, ReadableStringMap.ProcV<Object> callback) {
     throw new RuntimeException("not implemented");
   }
@@ -515,12 +509,10 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
 
     Container<Values> next = ranges.firstContainer();
 
-    @Override
     public boolean hasNext() {
       return next != ranges.sentinel();
     }
 
-    @Override
     public AnnotationInterval<Object> next() {
       if (!hasNext()) {
         throw new NoSuchElementException("no more intervals");
@@ -564,14 +556,12 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
 
     }
 
-    @Override
     public void remove() {
       throw new UnsupportedOperationException("removing an annotation interval is not supported");
     }
 
   }
 
-  @Override
   public Iterable<AnnotationInterval<Object>> annotationIntervals(int start, int end,
       ReadableStringSet keys) {
     if (keys == null) {
@@ -579,7 +569,7 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
         throw new RuntimeException("not implemented");
       }
       return new Iterable<AnnotationInterval<Object>>() {
-        @Override
+    	  
         public Iterator<AnnotationInterval<Object>> iterator() {
           return new RangesIterator();
         }
@@ -588,23 +578,19 @@ public class SimpleAnnotationSet implements RawAnnotationSet<Object> {
     return new GenericAnnotationIntervalIterable<Object>(this, start, end, keys);
   }
 
-  @Override
   public Iterable<RangedAnnotation<Object>> rangedAnnotations(int start, int end,
       ReadableStringSet keys) {
     throw new RuntimeException("not implemented");
   }
 
-  @Override
   public ReadableStringSet knownKeysLive() {
     throw new UnsupportedOperationException("knownKeysLive");
   }
 
-  @Override
   public ReadableStringSet knownKeys() {
     throw new UnsupportedOperationException("knownKeys");
   }
 
-  @Override
   public String getInherited(String key) {
     throw new UnsupportedOperationException("getInherited");
   }

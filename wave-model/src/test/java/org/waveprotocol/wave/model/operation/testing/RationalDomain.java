@@ -77,22 +77,18 @@ public class RationalDomain implements Domain<RationalDomain.Data, RationalDomai
     }
   }
 
-  @Override
   public Data initialState() {
     return new Data(Rational.ZERO);
   }
 
-  @Override
   public void apply(Affine op, Data state) throws OperationException {
     op.apply(state);
   }
 
-  @Override
   public Affine compose(Affine f, Affine g) throws OperationException {
     return f.of(g);
   }
 
-  @Override
   public OperationPair<Affine> transform(Affine clientOp, Affine serverOp)
       throws TransformException {
     try {
@@ -105,17 +101,14 @@ public class RationalDomain implements Domain<RationalDomain.Data, RationalDomai
     }
   }
 
-  @Override
   public Affine invert(Affine operation) {
     return operation.inverse();
   }
 
-  @Override
   public Affine asOperation(Data state) {
     return new Affine(Rational.ZERO, Rational.ONE, state.value);
   }
 
-  @Override
   public boolean equivalent(Data state1, Data state2) {
     return state1.value.equals(state2.value);
   }

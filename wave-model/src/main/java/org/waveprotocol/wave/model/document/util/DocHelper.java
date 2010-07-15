@@ -796,7 +796,7 @@ public class DocHelper {
    * A predicate that matches the document's root element
    */
   public static final DocPredicate ROOT_PREDICATE = new DocPredicate() {
-    @Override
+	  
     public <N, E extends N, T extends N> boolean apply(ReadableDocument<N, E, T> doc, N node) {
       return node == doc.getDocumentElement();
     }

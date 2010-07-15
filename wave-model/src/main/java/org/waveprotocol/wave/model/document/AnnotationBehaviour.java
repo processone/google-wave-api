@@ -94,16 +94,13 @@ public interface AnnotationBehaviour {
    * replacement always comes from inside the cursor, and is prioritised behind elements.
    */
   public static class DefaultAnnotationBehaviour implements AnnotationBehaviour {
-    @Override
     public BiasDirection getBias(StringMap<Object> left, StringMap<Object> right,
         CursorDirection cursor) {
       return BiasDirection.NEITHER;
     }
-    @Override
     public double getPriority() {
       return DEFAULT_PRIORITY;
     }
-    @Override
     public InheritDirection replace(StringMap<Object> inside, StringMap<Object> outside,
         ContentType type) {
       // Default behaviour: inherit, unless rich text in which case leave formatting as-is

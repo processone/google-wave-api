@@ -45,7 +45,7 @@ public class ElementHandlerRegistry {
 
   private static final DataDomain<HandlerData, HandlerData> handlerDataDomain =
       new DataDomain<HandlerData, HandlerData>() {
-        @Override
+	  
         public void compose(HandlerData target, HandlerData changes, HandlerData base) {
           target.handlers.clear();
           copyInto(target, base);
@@ -54,7 +54,7 @@ public class ElementHandlerRegistry {
 
         private void copyInto(final HandlerData target, HandlerData source) {
           source.handlers.each(new StringMap.ProcV<IdentityMap<Class<Object>, Object>>() {
-            @Override
+        	  
             public void apply(final String key,
                 IdentityMap<Class<Object>, Object> sourceElemHandlers) {
 
@@ -74,12 +74,10 @@ public class ElementHandlerRegistry {
           });
         }
 
-        @Override
         public HandlerData empty() {
           return new HandlerData();
         }
 
-        @Override
         public HandlerData readOnlyView(HandlerData modifiable) {
           return modifiable;
         }

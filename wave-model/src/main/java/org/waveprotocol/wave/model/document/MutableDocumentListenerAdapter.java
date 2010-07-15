@@ -23,7 +23,6 @@ public final class MutableDocumentListenerAdapter implements DocHandler {
     doc.addListener(new MutableDocumentListenerAdapter(listener, doc));
   }
 
-  @Override
   public void onDocumentEvents(DocHandler.EventBundle<Doc.N, Doc.E, Doc.T> event) {
     listener.onDocumentEvents(new MutableDocumentEvent(doc, event));
   }

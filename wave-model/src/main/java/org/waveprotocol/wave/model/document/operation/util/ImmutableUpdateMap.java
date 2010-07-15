@@ -51,22 +51,18 @@ public abstract class ImmutableUpdateMap<T extends ImmutableUpdateMap<T, U>, U e
 
   protected final List<AttributeUpdate> updates;
 
-  @Override
   public int changeSize() {
     return updates.size();
   }
 
-  @Override
   public String getChangeKey(int i) {
     return updates.get(i).name;
   }
 
-  @Override
   public String getOldValue(int i) {
     return updates.get(i).oldValue;
   }
 
-  @Override
   public String getNewValue(int i) {
     return updates.get(i).newValue;
   }
@@ -127,7 +123,7 @@ public abstract class ImmutableUpdateMap<T extends ImmutableUpdateMap<T, U>, U e
   }
 
   protected static final Comparator<AttributeUpdate> comparator = new Comparator<AttributeUpdate>() {
-    @Override
+	  
     public int compare(AttributeUpdate a, AttributeUpdate b) {
       return a.name.compareTo(b.name);
     }

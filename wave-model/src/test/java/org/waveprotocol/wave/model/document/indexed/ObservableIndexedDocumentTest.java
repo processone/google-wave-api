@@ -54,14 +54,12 @@ public class ObservableIndexedDocumentTest extends TestCase {
   private static final Map<String, String> NA = new HashMap<String, String>();
 
   DocumentHandler<Node, Element, Text> handler = new DocumentHandler<Node, Element, Text>() {
-    @Override
     public void onDocumentEvents(EventBundle<Node, Element, Text> eventBundle) {
       events = eventBundle;
     }
   };
 
   DocumentHandler<Node, Element, Text> handler2 = new DocumentHandler<Node, Element, Text>() {
-    @Override
     public void onDocumentEvents(EventBundle<Node, Element, Text> eventBundle) {
       events2 = eventBundle;
     }
@@ -380,11 +378,9 @@ public class ObservableIndexedDocumentTest extends TestCase {
 
     doc = new MutableDocumentImpl<Node, Element, Text>(
         new OperationSequencer<Nindo>() {
-          @Override
           public void begin() {
           }
 
-          @Override
           public void consume(Nindo op) {
             try {
               consumeNindo(op);
@@ -393,7 +389,6 @@ public class ObservableIndexedDocumentTest extends TestCase {
             }
           }
 
-          @Override
           public void end() {
           }
         }, testNindoConsume ? indexed : indexedCopy);

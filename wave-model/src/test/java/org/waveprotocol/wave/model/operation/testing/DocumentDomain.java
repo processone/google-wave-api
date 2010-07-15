@@ -16,28 +16,23 @@ import org.waveprotocol.wave.model.operation.TransformException;
 
 public class DocumentDomain implements Domain<BootstrapDocument, BufferedDocOp> {
 
-  @Override
   public BootstrapDocument initialState() {
     return new BootstrapDocument();
   }
 
-  @Override
   public void apply(BufferedDocOp op, BootstrapDocument state) throws OperationException {
     state.consume(op);
   }
 
-  @Override
   public BufferedDocOp compose(BufferedDocOp f, BufferedDocOp g) throws OperationException {
     return Composer.compose(g, f);
   }
 
-  @Override
   public OperationPair<BufferedDocOp> transform(BufferedDocOp clientOp, BufferedDocOp serverOp)
       throws TransformException {
     return Transformer.transform(clientOp, serverOp);
   }
 
-  @Override
   public BufferedDocOp invert(BufferedDocOp operation) {
     EvaluatingDocOpCursor<BufferedDocOp> inverter =
         new DocOpInverter<BufferedDocOp>(new DocOpBuffer());
@@ -45,14 +40,12 @@ public class DocumentDomain implements Domain<BootstrapDocument, BufferedDocOp> 
     return inverter.finish();
   }
 
-  @Override
   public BufferedDocOp asOperation(BootstrapDocument state) {
     EvaluatingDocOpCursor<BufferedDocOp> builder = new DocOpBuffer();
     state.asOperation().apply(builder);
     return builder.finish();
   }
 
-  @Override
   public boolean equivalent(BootstrapDocument state1, BootstrapDocument state2) {
     return state1.toString().equals(state2.toString());
   }

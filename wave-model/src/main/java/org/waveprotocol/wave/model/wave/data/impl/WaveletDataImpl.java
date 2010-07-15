@@ -89,31 +89,26 @@ public class WaveletDataImpl implements WaveletData {
     return doc;
   }
 
-  @Override public Map<String, BufferedDocOp> getDocuments() {
+  public Map<String, BufferedDocOp> getDocuments() {
     return Collections.unmodifiableMap(documents);
   }
 
-  @Override
   public List<ParticipantId> getParticipants() {
     return Collections.unmodifiableList(participants);
   }
 
-  @Override
   public WaveletName getWaveletName() {
     return WaveletName.of(waveId, waveletId);
   }
 
-  @Override
   public boolean addParticipant(ParticipantId p) {
     return (participants.contains(p) ? false : participants.add(p));
   }
 
-  @Override
   public boolean removeParticipant(ParticipantId p) {
     return participants.remove(p);
   }
 
-  @Override
   public boolean modifyDocument(String documentId, BufferedDocOp operation)
       throws OperationException {
     BufferedDocOp newDoc = Composer.compose(getOrCreateDocument(documentId), operation);

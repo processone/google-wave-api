@@ -40,7 +40,6 @@ public final class GenericAnnotationCursor<V> implements AnnotationCursor {
       this.location = initialLocation;
     }
 
-    @Override
     // The PriorityQueue documentation states that the head will have the least
     // value, so we want a natural ordering on location.
     public int compareTo(KeyLocation other) {
@@ -74,7 +73,7 @@ public final class GenericAnnotationCursor<V> implements AnnotationCursor {
     this.annotations = annotations;
     this.end = end;
     keys.each(new Proc() {
-      @Override
+    	
       public void apply(String key) {
         advance(new KeyLocation(key, start));
       }
@@ -82,7 +81,6 @@ public final class GenericAnnotationCursor<V> implements AnnotationCursor {
     this.currentLocation = hasNext() ? start : -1;
   }
 
-  @Override
   public ReadableStringSet nextLocation() {
     if (!hasNext()) {
       throw new NoSuchElementException();
@@ -101,12 +99,10 @@ public final class GenericAnnotationCursor<V> implements AnnotationCursor {
     return currentKeys;
   }
 
-  @Override
   public int currentLocation() {
     return currentLocation;
   }
 
-  @Override
   public boolean hasNext() {
     return !locations.isEmpty();
   }

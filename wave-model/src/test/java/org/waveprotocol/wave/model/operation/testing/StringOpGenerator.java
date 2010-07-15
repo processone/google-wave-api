@@ -17,7 +17,6 @@ public class StringOpGenerator implements RandomOpGenerator<Data, StringOp> {
 
   final int maxComponents = 20;
 
-  @Override
   public StringOp randomOperation(Data state, Random random) {
 
     int numComponents = random.nextInt(maxComponents);

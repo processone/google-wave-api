@@ -55,12 +55,10 @@ public final class NindoValidator {
     try {
       m.apply(new NindoCursor() {
 
-        @Override
         public void begin() {
           // Not checking begin and finish for now since they should go away.
         }
 
-        @Override
         public void characters(String s) {
           if (a.checkCharacters(s, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -68,7 +66,6 @@ public final class NindoValidator {
           a.doCharacters(s);
         }
 
-        @Override
         public void deleteCharacters(int n) {
           if (a.checkDeleteCharacters(n, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -76,7 +73,6 @@ public final class NindoValidator {
           a.doDeleteCharacters(n);
         }
 
-        @Override
         public void deleteElementEnd() {
           if (a.checkDeleteElementEnd(v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -84,7 +80,6 @@ public final class NindoValidator {
           a.doDeleteElementEnd();
         }
 
-        @Override
         public void deleteElementStart() {
           if (a.checkDeleteElementStart(v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -92,7 +87,6 @@ public final class NindoValidator {
           a.doDeleteElementStart();
         }
 
-        @Override
         public void elementEnd() {
           if (a.checkElementEnd(v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -100,7 +94,6 @@ public final class NindoValidator {
           a.doElementEnd();
         }
 
-        @Override
         public void elementStart(String tagName, Attributes attributes) {
           if (a.checkElementStart(tagName, attributes, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -108,7 +101,6 @@ public final class NindoValidator {
           a.doElementStart(tagName, attributes);
         }
 
-        @Override
         public void endAnnotation(String key) {
           if (a.checkEndAnnotation(key, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -116,12 +108,10 @@ public final class NindoValidator {
           a.doEndAnnotation(key);
         }
 
-        @Override
         public void finish() {
           // Not checking begin and finish for now since they should go away.
         }
 
-        @Override
         public void replaceAttributes(Attributes attributes) {
           if (a.checkSetAttributes(attributes, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -129,7 +119,6 @@ public final class NindoValidator {
           a.doSetAttributes(attributes);
         }
 
-        @Override
         public void skip(int n) {
           if (a.checkSkip(n, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -137,7 +126,6 @@ public final class NindoValidator {
           a.doSkip(n);
         }
 
-        @Override
         public void startAnnotation(String key, String value) {
           if (a.checkStartAnnotation(key, value, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();
@@ -145,7 +133,6 @@ public final class NindoValidator {
           a.doStartAnnotation(key, value);
         }
 
-        @Override
         public void updateAttributes(Map<String, String> attributes) {
           if (a.checkUpdateAttributes(attributes, v) == ValidationResult.ILL_FORMED) {
             throw new IllFormed();

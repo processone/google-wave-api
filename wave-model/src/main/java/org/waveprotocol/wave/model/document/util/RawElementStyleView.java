@@ -23,7 +23,6 @@ public class RawElementStyleView extends IdentityView<Node, Element, Text>
   }
 
   /** {@inheritDoc} */
-  @Override
   public String getStylePropertyValue(Element element, String name) {
     // TODO(user): This is a highly non-optimal solution, but this is just for
     // testing. Did not want to pollute the raw Element class with this.

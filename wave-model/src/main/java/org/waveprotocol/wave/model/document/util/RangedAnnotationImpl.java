@@ -43,22 +43,18 @@ public final class RangedAnnotationImpl<V> implements RangedAnnotation<V> {
     this.end = end;
   }
 
-  @Override
   public String key() {
     return key;
   }
 
-  @Override
   public V value() {
     return value;
   }
 
-  @Override
   public int start() {
     return start;
   }
 
-  @Override
   public int end() {
     return end;
   }

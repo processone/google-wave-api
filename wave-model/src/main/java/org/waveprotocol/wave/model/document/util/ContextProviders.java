@@ -66,52 +66,52 @@ public class ContextProviders {
       super(fullDoc);
       this.writable = local;
     }
-    @Override
+    
     public <T> T getProperty(Property<T> property, E element) {
       return writable.getProperty(property, element);
     }
-    @Override
+    
     public boolean isDestroyed(E element) {
       return writable.isDestroyed(element);
     }
-    @Override
+    
     public <T> void setProperty(Property<T> property, E element, T value) {
       writable.setProperty(property, element, value);
     }
-    @Override
+    
     public T transparentCreate(String text, E parent, N nodeAfter) {
       return writable.transparentCreate(text, parent, nodeAfter);
     }
-    @Override
+
     public E transparentCreate(String tagName, Map<String, String> attributes,
         E parent, N nodeAfter) {
       return writable.transparentCreate(tagName, attributes, parent, nodeAfter);
     }
-    @Override
+    
     public void transparentSetAttribute(E element, String name, String value) {
       writable.transparentSetAttribute(element, name, value);
     }
-    @Override
+    
     public void transparentDeepRemove(N node) {
       writable.transparentDeepRemove(node);
     }
-    @Override
+    
     public void transparentMove(E newParent, N fromIncl, N toExcl, N refChild) {
       writable.transparentMove(newParent, fromIncl, toExcl, refChild);
     }
-    @Override
+    
     public N transparentSlice(N splitAt) {
       return writable.transparentSlice(splitAt);
     }
-    @Override
+    
     public void transparentUnwrap(E element) {
       writable.transparentUnwrap(element);
     }
-    @Override
+    
     public void markNodeForPersistence(N localNode, boolean lazy) {
       writable.markNodeForPersistence(localNode, lazy);
     }
-    @Override
+    
     public boolean isTransparent(N node) {
       return writable.isTransparent(node);
     }
@@ -132,7 +132,7 @@ public class ContextProviders {
 
     return box.boxed = createTestPojoContext(initialInnerXml,
         docHandler, new AnnotationSetListener<Object>() {
-            @Override
+    	
             public void onAnnotationChange(int start, int end, String key, Object newValue) {
               Iterator<AnnotationMutationHandler> handlers = annotationRegistry.getHandlers(key);
               while (handlers.hasNext()) {
@@ -176,7 +176,7 @@ public class ContextProviders {
 
     final AnnotationSetListener<Object> annotationListener = annotationSetListener != null
         ? annotationSetListener : new AnnotationSetListener<Object>() {
-          @Override
+    	
           public void onAnnotationChange(int start, int end, String key, Object newValue) {
             // Do nothing
           }
@@ -232,47 +232,46 @@ public class ContextProviders {
           private final LocalAnnotationSetImpl localAnnotations =
               new LocalAnnotationSetImpl(fullAnnotations);
 
-          @Override
           public LocalDocument<Node, Element, Text> annotatableContent() {
             return localDoc;
           }
-          @Override
+          
           public MutableDocument<Node, Element, Text> document() {
             return mutableDoc;
           }
-          @Override
+          
           public ElementManager<Element> elementManager() {
             return Element.ELEMENT_MANAGER;
           }
-          @Override
+          
           public MutableAnnotationSet.Local localAnnotations() {
             return localAnnotations;
           }
-          @Override
+          
           public LocationMapper<Node> locationMapper() {
             return indexedDoc;
           }
-          @Override
+          
           public ReadableDocumentView<Node, Element, Text> persistentView() {
             return persistentDoc;
           }
-          @Override
+          
           public ReadableDocumentView<Node, Element, Text> hardView() {
             return persistentDoc.hardView();
           }
-          @Override
+          
           public TextNodeOrganiser<Text> textNodeOrganiser() {
             return indexedDoc;
           }
-          @Override
+          
           public IndexedDocument<Node, Element, Text> getIndexedDoc() {
             return indexedDoc;
           }
-          @Override
+          
           public RawDocument<Node, Element, Text> getFullRawDoc() {
             return fullDoc;
           }
-          @Override
+          
           public RawDocument<Node, Element, Text> getPersistentRawDoc() {
             return persistentDoc;
           }

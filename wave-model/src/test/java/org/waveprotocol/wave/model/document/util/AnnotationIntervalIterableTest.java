@@ -42,7 +42,6 @@ public abstract class AnnotationIntervalIterableTest<S extends RawAnnotationSet<
       final ReadableStringMap<V> actual) {
     final int[] bCount = { 0 };
     expected.each(new ReadableStringMap.ProcV<V>() {
-      @Override
       public void apply(String key, V value) {
         bCount[0]++;
         assertTrue("Expected key not present: " + key, actual.containsKey(key));

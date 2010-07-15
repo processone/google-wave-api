@@ -63,7 +63,6 @@ public class IndexedDocumentImplTest extends TestCase {
       return document.toString();
     }
 
-    @Override
     public IndexedDocumentImpl<Node, Element, Text, ?> copyDocument(
         IndexedDocumentImpl<Node, Element, Text, ?> other) {
       return doCopyDocument(other);
@@ -86,7 +85,6 @@ public class IndexedDocumentImplTest extends TestCase {
       return document.toString();
     }
 
-    @Override
     public IndexedDocumentImpl<Node, Element, Text, ?> copyDocument(
         IndexedDocumentImpl<Node, Element, Text, ?> other) {
       return doCopyDocument(other);

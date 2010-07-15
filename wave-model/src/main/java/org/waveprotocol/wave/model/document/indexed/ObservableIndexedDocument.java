@@ -93,7 +93,7 @@ public class ObservableIndexedDocument<N, E extends N, T extends N, V>
     super(substrate, annotations, schema);
 
     AnnotationSetListener<Object> listener = new AnnotationSetListener<Object>() {
-      @Override
+    	
       public void onAnnotationChange(int start, int end, String key, Object newValue) {
         event(new AnnotationChanged<N, E, T>(start, end, key, (String) newValue));
       }

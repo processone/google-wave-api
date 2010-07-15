@@ -53,15 +53,13 @@ public class DocProviders {
   public final static <N, E extends N> OperationSequencer<Nindo> createTrivialSequencer(
       final IndexedDocument<N, E, ? extends N> doc, final OperationSink<DocOp> outputSink) {
     return new OperationSequencer<Nindo>() {
-      @Override
+    	
       public void begin() {
       }
 
-      @Override
       public void end() {
       }
 
-      @Override
       public void consume(Nindo op) {
         try {
           DocOp docOp = doc.consumeAndReturnInvertible(op);

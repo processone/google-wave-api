@@ -585,11 +585,11 @@ public final class RandomDocOpGenerator {
           assert accu.changeSize() == 0;
           accu = pickRandomNonNullMappedElement(r,
               p.getAttributeNames(), new Mapper<String, AttributesUpdate>() {
-            @Override
+        	  
             public AttributesUpdate map(final String name) {
               return pickRandomNonNullMappedElement(r, p.getAttributeValues(),
                   new Mapper<String, AttributesUpdate> () {
-                @Override
+            	  
                 public AttributesUpdate map(String value) {
                   AttributesUpdate b = new AttributesUpdateImpl(name,
                       oldAttributes.get(name), value);
@@ -623,7 +623,7 @@ public final class RandomDocOpGenerator {
         final AttributesUpdate finalAccu = accu;
         AttributesUpdate newAccu = pickRandomNonNullMappedElement(r,
             p.getAttributeNames(), new Mapper<String, AttributesUpdate>() {
-          @Override
+        	
           public AttributesUpdate map(final String name) {
             for (int i = 0; i < finalAccu.changeSize(); i++) {
               if (finalAccu.getChangeKey(i).equals(name)) {
@@ -632,7 +632,7 @@ public final class RandomDocOpGenerator {
             }
             return pickRandomNonNullMappedElement(r, p.getAttributeValues(),
                 new Mapper<String, AttributesUpdate>() {
-              @Override
+            	
               public AttributesUpdate map(String value) {
                 AttributesUpdate b = finalAccu.composeWith(new AttributesUpdateImpl(name,
                     oldAttributes.get(name), value));
@@ -656,7 +656,7 @@ public final class RandomDocOpGenerator {
     }
 
     class ElementStartGenerator extends RandomOperationComponentGenerator {
-      @Override
+    	
       RandomizerOperationComponent generate(DocOpAutomaton a, boolean valid, Stage stage) {
         switch (stage) {
           case S1_UNRESTRICTED:
@@ -682,7 +682,7 @@ public final class RandomDocOpGenerator {
 
         AttributesUpdate u = generateRandomAttributesUpdate(valid, Attributes.EMPTY_MAP,
             new AttributesUpdateChecker() {
-              @Override
+        	
               public ValidationResult check(AttributesUpdate u) {
                 Attributes attrs = Attributes.EMPTY_MAP.updateWith(u);
                 return a.checkElementStart(tag, attrs, null);
@@ -693,22 +693,19 @@ public final class RandomDocOpGenerator {
         } else {
           final Attributes attributes = Attributes.EMPTY_MAP.updateWith(u);
           return new RandomizerOperationComponent() {
-            @Override
+        	  
             public ValidationResult check(DocOpAutomaton a, ViolationCollector v) {
               return a.checkElementStart(tag, attributes, v);
             }
 
-            @Override
             public void apply(DocOpAutomaton a) {
               a.doElementStart(tag, attributes);
             }
 
-            @Override
             public void output(DocOpCursor c) {
               c.elementStart(tag, attributes);
             }
 
-            @Override
             public String toString() {
               return "ElementStart(" + tag + ", " + attributes + ")";
             }
@@ -719,7 +716,7 @@ public final class RandomDocOpGenerator {
       RandomizerOperationComponent generate(final DocOpAutomaton a, final boolean valid) {
         return pickRandomNonNullMappedElement(r, p.getElementTypes(),
             new Mapper<String, RandomizerOperationComponent>() {
-              @Override
+        	
               public RandomizerOperationComponent map(final String tag) {
                 return generateGivenTag(a, valid, tag);
               }
@@ -927,7 +924,7 @@ public final class RandomDocOpGenerator {
         }
         AttributesUpdate u = generateRandomAttributesUpdate(valid,
             oldAttrs, new AttributesUpdateChecker() {
-          @Override
+        	
           public ValidationResult check(AttributesUpdate u) {
             return a.checkReplaceAttributes(oldAttrs, oldAttrs.updateWith(u), null);
           }
@@ -939,6 +936,7 @@ public final class RandomDocOpGenerator {
 
         final Attributes newAttrs = oldAttrs.updateWith(u);
         return new RandomizerOperationComponent() {
+        	
           @Override
           public void apply(DocOpAutomaton a) {
             a.doReplaceAttributes(oldAttrs, newAttrs);
@@ -983,7 +981,7 @@ public final class RandomDocOpGenerator {
         }
         final AttributesUpdate update = generateRandomAttributesUpdate(valid,
             oldAttrs, new AttributesUpdateChecker() {
-          @Override
+        	
           public ValidationResult check(AttributesUpdate u) {
             return a.checkUpdateAttributes(u, null);
           }
@@ -1090,7 +1088,7 @@ public final class RandomDocOpGenerator {
       }
 
       class StringNullComparator implements Comparator<String> {
-        @Override
+    	  
         public int compare(String a, String b) {
           if (a == b) {
             return 0;
@@ -1248,7 +1246,6 @@ public final class RandomDocOpGenerator {
             }
           }
 
-          @Override
           public void run() throws Result {
             nextKey(0);
           }
@@ -1303,7 +1300,7 @@ public final class RandomDocOpGenerator {
       RandomizerOperationComponent component = pickRandomNonNullMappedElement(r,
           componentGenerators,
           new Mapper<RandomOperationComponentGenerator, RandomizerOperationComponent>() {
-        @Override
+    	  
         public RandomizerOperationComponent map(RandomOperationComponentGenerator g) {
 //          System.err.println("trying generator " + g);
           RandomizerOperationComponent c = g.generate(a, true, stage);
@@ -1380,7 +1377,7 @@ public final class RandomDocOpGenerator {
   public static void main(String[] args) throws OperationException {
     BootstrapDocument initialDoc = new BootstrapDocument();
     initialDoc.consume(new DocOp() {
-      @Override
+    	
       public void apply(DocOpCursor c) {
         c.elementStart("blip", Attributes.EMPTY_MAP);
         c.elementStart("p", Attributes.EMPTY_MAP);

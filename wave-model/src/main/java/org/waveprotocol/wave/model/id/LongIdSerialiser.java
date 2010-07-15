@@ -27,21 +27,18 @@ public class LongIdSerialiser implements IdSerialiser {
 
   public static final LongIdSerialiser INSTANCE = new LongIdSerialiser();
 
-  @Override
   public String serialiseWaveId(WaveId waveId) {
     return waveId.getDomain() + PART_SEPARATOR + waveId.getId();
   }
 
-  @Override
   public String serialiseWaveletId(WaveletId waveletId) {
     return waveletId.getDomain() + PART_SEPARATOR + waveletId.getId();
   }
 
-  @Override
   public WaveId deserialiseWaveId(String serialisedForm) throws InvalidIdException {
     String[] parts = SimplePrefixEscaper.DEFAULT_ESCAPER.splitWithoutUnescaping(
         PART_SEPARATOR, serialisedForm);
-    if ((parts.length != 2) || parts[0].isEmpty() || parts[1].isEmpty()) {
+    if ((parts.length != 2) || parts[0].length() == 0 || parts[1].length() == 0) {
       throw new InvalidIdException(serialisedForm,
           "Wave id must be of the form <domain>" + PART_SEPARATOR + "<id>");
     } else {
@@ -49,11 +46,10 @@ public class LongIdSerialiser implements IdSerialiser {
     }
   }
 
-  @Override
   public WaveletId deserialiseWaveletId(String serialisedForm) throws InvalidIdException {
     String[] parts = SimplePrefixEscaper.DEFAULT_ESCAPER.splitWithoutUnescaping(
         PART_SEPARATOR, serialisedForm);
-    if ((parts.length != 2) || parts[0].isEmpty() || parts[1].isEmpty()) {
+    if ((parts.length != 2) || parts[0].length() == 0 || parts[1].length() == 0) {
       throw new InvalidIdException(serialisedForm,
           "Wavelet id must be of the form <domain>" + PART_SEPARATOR + "<id>");
     } else {

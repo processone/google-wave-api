@@ -126,7 +126,6 @@ public class AnnotationsTest extends TestCase {
     private int lastChangeStart = -1;
     private int lastChangeEnd = -1;
 
-    @Override
     public void onAnnotationChange(int start, int end, String key, Object newValue) {
       lastChangeStart = start;
       lastChangeEnd = end;
