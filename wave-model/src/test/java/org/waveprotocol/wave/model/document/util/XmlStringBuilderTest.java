@@ -93,20 +93,20 @@ public class XmlStringBuilderTest extends TestCase {
     StringMap<String> attribs = CollectionUtils.createStringMap();
     attribs.put("a", "1");
     attribs.put("b", "");
-    check(2, "<x b=\"\" a=\"1\"></x>",
+    check(2, "<x a=\"1\" b=\"\"></x>",
         XmlStringBuilder.createEmpty().wrap("x", attribs));
 
     attribs = CollectionUtils.createStringMap();
     attribs.put("a", "");
     attribs.put("b", "");
-    check(2, "<x b=\"\" a=\"\"></x>",
+    check(2, "<x a=\"\" b=\"\"></x>",
         XmlStringBuilder.createEmpty().wrap("x", attribs));
 
     attribs = CollectionUtils.createStringMap();
     attribs.put("a", "");
     attribs.put("b", "2");
     attribs.put("c", "");
-    check(2, "<x b=\"2\" c=\"\" a=\"\"></x>",
+    check(2, "<x a=\"\" b=\"2\" c=\"\"></x>",
         XmlStringBuilder.createEmpty().wrap("x", attribs));
   }
 

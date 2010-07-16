@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -633,7 +634,7 @@ public class CollectionUtils {
    */
   private static class HashCollectionFactory implements CollectionFactory {
     public <V> StringMap<V> createStringMap() {
-      return CollectionUtils.adaptStringMap(new HashMap<String, V>());
+      return CollectionUtils.adaptStringMap(new LinkedHashMap<String, V>());
     }
 
     public <V> NumberMap<V> createNumberMap() {
