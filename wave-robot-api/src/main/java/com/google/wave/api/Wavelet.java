@@ -464,7 +464,7 @@ public class Wavelet {
    * @param proxyForId the id to proxy.
    */
   private void addProxyingParticipant(String proxyForId) {
-    if (robotAddress == null || robotAddress.isEmpty()) {
+    if (robotAddress == null || robotAddress.length() == 0) {
       throw new IllegalStateException("Need a robot address to add a proxying for participant.");
     }
 

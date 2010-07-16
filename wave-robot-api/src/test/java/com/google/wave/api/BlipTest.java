@@ -110,7 +110,6 @@ public class BlipTest extends TestCase {
     blip.at(1).insert("world!");
 
     blip.first("world").insert(new BlipContentFunction() {
-      @Override
       public BlipContent call(BlipContent source) {
         return Plaintext.of("Hello " + source.getText().length() + " ");
       }
@@ -155,7 +154,6 @@ public class BlipTest extends TestCase {
     assertEquals("\n  some piece of text.", blip.getContent());
     assertEquals(url, ((Image) blip.first(ElementType.IMAGE).value()).getUrl());
     blip.first(ElementType.IMAGE).insertAfter(new BlipContentFunction() {
-      @Override
       public BlipContent call(BlipContent source) {
         Image matchedImage = (Image) source;
         return Plaintext.of(matchedImage.getUrl());
@@ -169,7 +167,6 @@ public class BlipTest extends TestCase {
     assertEquals("\n  some piece of text.", blip.getContent());
     assertEquals(url, ((Image) blip.first(ElementType.IMAGE).value()).getUrl());
     blip.first(ElementType.IMAGE).replace(new BlipContentFunction() {
-      @Override
       public BlipContent call(BlipContent source) {
         Image matchedImage = (Image) source;
         return new Image(matchedImage.getUrl() + "?query=foo", matchedImage.getWidth(),
@@ -187,7 +184,6 @@ public class BlipTest extends TestCase {
 
     // Update the image by appending a query param to the URL.
     blip.first(ElementType.IMAGE).updateElement(new MapFunction() {
-      @Override
       public Map<String, String> call(BlipContent source) {
         Image matchedImage = (Image) source;
         Map<String, String> properties = new HashMap<String, String>();

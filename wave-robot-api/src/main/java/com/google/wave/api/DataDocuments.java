@@ -117,7 +117,6 @@ public class DataDocuments implements Iterable<Entry<String,String>> {
     return dataDocuments.get(name);
   }
   
-  @Override
   public Iterator<Entry<String, String>> iterator() {
     return dataDocuments.entrySet().iterator();
   }

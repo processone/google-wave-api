@@ -58,12 +58,10 @@ public class EventMessageBundleGsonAdaptor implements
   private static final String ROBOT_ADDRESS_TAG = "robotAddress";
   private static final String RPC_SERVER_URL_TAG = "rpcServerUrl";
 
-  @Override
   public EventMessageBundle createInstance(Type type) {
     return new EventMessageBundle("", "http://opensocial.example.com");
   }
 
-  @Override
   public JsonElement serialize(EventMessageBundle src, Type typeOfSrc,
       JsonSerializationContext context) {
     JsonObject result = new JsonObject();
@@ -83,18 +81,17 @@ public class EventMessageBundleGsonAdaptor implements
     result.addProperty(ROBOT_ADDRESS_TAG, src.getRobotAddress());
 
     String proxyingFor = src.getProxyingFor();
-    if (proxyingFor != null && !proxyingFor.isEmpty()) {
+    if (proxyingFor != null && proxyingFor.length() != 0) {
       result.addProperty(PROXYING_FOR_TAG, proxyingFor);
     }
 
     String rpcServerUrl = src.getRpcServerUrl();
-    if (rpcServerUrl != null && !rpcServerUrl.isEmpty()) {
+    if (rpcServerUrl != null && rpcServerUrl.length() != 0) {
       result.addProperty(RPC_SERVER_URL_TAG, rpcServerUrl);
     }
     return result;
   }
 
-  @Override
   public EventMessageBundle deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
     JsonObject jsonObj = json.getAsJsonObject();

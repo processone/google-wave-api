@@ -169,7 +169,7 @@ public class Attachment extends Element {
   }
   
   private void fetch() throws IOException {
-    if (getAttachmentUrl() != null && (!getAttachmentUrl().isEmpty())) {
+    if (getAttachmentUrl() != null && (getAttachmentUrl().length() != 0)) {
       InputStream input = null;
       ByteArrayOutputStream output = null;
       try {

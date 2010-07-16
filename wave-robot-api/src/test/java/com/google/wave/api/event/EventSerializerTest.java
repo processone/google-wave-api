@@ -46,17 +46,14 @@ public class EventSerializerTest extends TestCase {
 
     private final Gson gson = new GsonFactory().create();
 
-    @Override
     public JsonElement serialize(Object src) {
       return gson.toJsonTree(src);
     }
 
-    @Override
     public JsonElement serialize(Object src, Type type) {
       return gson.toJsonTree(src, type);
     }
 
-    @Override
     public <T> T deserialize(JsonElement json, Type type) throws JsonParseException {
       return (T) gson.fromJson(json, type);
     }

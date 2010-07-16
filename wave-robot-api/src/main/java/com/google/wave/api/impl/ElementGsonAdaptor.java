@@ -48,7 +48,6 @@ public class ElementGsonAdaptor implements JsonDeserializer<Element>,
   protected static final String TYPE_TAG = "type";
   protected static final String PROPERTIES_TAG = "properties";
 
-  @Override
   public Element deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
     Element result = null;
@@ -80,7 +79,6 @@ public class ElementGsonAdaptor implements JsonDeserializer<Element>,
     return result;
   }
 
-  @Override
   public JsonElement serialize(Element src, Type typeOfSrc, JsonSerializationContext context) {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty(TYPE_TAG, src.getType().toString());

@@ -214,7 +214,6 @@ public class Annotations implements Iterable<Annotation> {
     return Collections.unmodifiableList(annotations);
   }
 
-  @Override
   public Iterator<Annotation> iterator() {
     return new AnnotationIterator(store);
   }
@@ -239,12 +238,10 @@ public class Annotations implements Iterable<Annotation> {
       }
     }
 
-    @Override
     public boolean hasNext() {
       return mapIterator.hasNext() || (listIterator != null && listIterator.hasNext());
     }
 
-    @Override
     public Annotation next() {
       if (!listIterator.hasNext() && mapIterator.hasNext()) {
         listIterator = mapIterator.next().iterator();
@@ -252,7 +249,6 @@ public class Annotations implements Iterable<Annotation> {
       return listIterator.next();
     }
 
-    @Override
     public void remove() {
       throw new UnsupportedOperationException();
     }

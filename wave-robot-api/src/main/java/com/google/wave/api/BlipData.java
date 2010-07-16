@@ -123,7 +123,7 @@ public class BlipData {
     this.waveletId = waveletId;
 
     // Make sure that initial content is valid, and starts with newline.
-    if (initialContent == null || initialContent.isEmpty()) {
+    if (initialContent == null || initialContent.length() == 0) {
       initialContent = "\n";
     } else if (!initialContent.startsWith("\n")) {
       initialContent = "\n" + initialContent;

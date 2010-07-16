@@ -59,14 +59,13 @@ public class OperationRequestGsonAdaptor implements JsonSerializer<OperationRequ
    *     operation method during serialization.
    */
   public OperationRequestGsonAdaptor(String operationNamespace) {
-    if (operationNamespace != null && !operationNamespace.isEmpty() &&
+    if (operationNamespace != null && operationNamespace.length() == 0 &&
         !operationNamespace.endsWith(".")) {
       operationNamespace += ".";
     }
     this.operationNamespace = operationNamespace;
   }
 
-  @Override
   public JsonElement serialize(OperationRequest req, Type type, JsonSerializationContext ctx) {
     JsonObject object = new JsonObject();
     object.addProperty(RequestProperty.METHOD.key(), operationNamespace + req.getMethod());
@@ -91,7 +90,6 @@ public class OperationRequestGsonAdaptor implements JsonSerializer<OperationRequ
     return object;
   }
 
-  @Override
   public OperationRequest deserialize(JsonElement json, Type type, JsonDeserializationContext ctx)
       throws JsonParseException {
     JsonObject jsonObject = json.getAsJsonObject();

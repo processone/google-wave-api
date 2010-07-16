@@ -507,7 +507,7 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
     OperationQueue opQueue = new OperationQueue(proxyForId);
     Wavelet newWavelet = opQueue.createWavelet(domain, participants, msg);
 
-    if (rpcServerUrl != null && !rpcServerUrl.isEmpty()) {
+    if (rpcServerUrl != null && rpcServerUrl.length() != 0) {
       // Get the response for the robot.fetchWavelet() operation, which is the
       // second operation, since makeRpc prepends the robot.notify() operation.
       JsonRpcResponse response = this.submit(newWavelet, rpcServerUrl).get(1);
@@ -734,7 +734,7 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
    * @param resp the HTTP response.
    */
   private void processVerifyToken(HttpServletRequest req, HttpServletResponse resp) {
-    if (verificationToken == null || verificationToken.isEmpty()) {
+    if (verificationToken == null || verificationToken.length() == 0) {
       LOG.info("Please register a verification token by calling " +
           "AbstractRobot.setVerificationToken().");
       resp.setStatus(HttpURLConnection.HTTP_INTERNAL_ERROR);
@@ -797,7 +797,7 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
         }
 
         // Append filter.
-        if (capability.filter() !=  null && !capability.filter().isEmpty()) {
+        if (capability.filter() !=  null && capability.filter().length() != 0) {
           xml.append(" filter=\"");
           xml.append(capability.filter());
           xml.append("\"");
@@ -1107,10 +1107,10 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
       return responses;
     } catch (OAuthException e) {
       LOG.warning("OAuthException when constructing the OAuth parameters: " + e);
-      throw new IOException(e);
+      throw new IOException(e.getMessage());
     } catch (URISyntaxException e) {
       LOG.warning("URISyntaxException when constructing the OAuth parameters: " + e);
-      throw new IOException(e);
+      throw new IOException(e.getMessage());
     }
   }
 
@@ -1247,83 +1247,67 @@ public abstract class AbstractRobot extends HttpServlet implements EventHandler 
     message.validateMessage(accessor, new SimpleOAuthValidator());
   }
 
-  @Override
   public void onAnnotatedTextChanged(AnnotatedTextChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onBlipContributorsChanged(BlipContributorsChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onBlipSubmitted(BlipSubmittedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onDocumentChanged(DocumentChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onFormButtonClicked(FormButtonClickedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onGadgetStateChanged(GadgetStateChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletBlipCreated(WaveletBlipCreatedEvent event) {
     // No-op.
   }
 
 
-  @Override
   public void onWaveletBlipRemoved(WaveletBlipRemovedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletCreated(WaveletCreatedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletFetched(WaveletFetchedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletParticipantsChanged(WaveletParticipantsChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletSelfAdded(WaveletSelfAddedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletSelfRemoved(WaveletSelfRemovedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletTagsChanged(WaveletTagsChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onWaveletTitleChanged(WaveletTitleChangedEvent event) {
     // No-op.
   }
 
-  @Override
   public void onOperationError(OperationErrorEvent event) {
     // No-op.
   }

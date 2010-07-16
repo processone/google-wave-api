@@ -104,7 +104,6 @@ public class OAuthServiceImpl implements OAuthService {
     this.oauthClient = client;
   }
 
-  @Override
   public boolean checkAuthorization(Wavelet wavelet, LoginFormHandler loginForm) {
 
     OAuthUser user = retrieveUserProfile();
@@ -132,7 +131,6 @@ public class OAuthServiceImpl implements OAuthService {
     return false;
   }
 
-  @Override
   public boolean hasAuthorization() {
     OAuthUser user = retrieveUserProfile();
     return (user != null && user.getAccessToken() != null);
@@ -215,12 +213,10 @@ public class OAuthServiceImpl implements OAuthService {
     return accessToken;
   }
 
-  @Override
   public String post(String url, Map<String, String> parameters) throws OAuthServiceException {
     return requestResources(url, POST, parameters);
   }
 
-  @Override
   public String get(String url, Map<String, String> parameters) throws OAuthServiceException {
     return requestResources(url, GET, parameters);
   }

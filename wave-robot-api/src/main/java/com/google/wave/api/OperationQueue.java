@@ -193,7 +193,7 @@ public class OperationQueue {
         newWavelet, Parameter.of(ParamsProperty.WAVELET_DATA, newWavelet.serialize()));
 
     // Don't add the message if it's null or empty.
-    if (message != null && !message.isEmpty()) {
+    if (message != null && message.length() != 0) {
       operation.addParameter(Parameter.of(ParamsProperty.MESSAGE, message));
     }
     return newWavelet;
@@ -442,7 +442,7 @@ public class OperationQueue {
         waveIdString, waveletIdString, blipId, parameters);
 
     // Set the proxying for parameter, if necessary.
-    if (proxyForId != null && !proxyForId.isEmpty()) {
+    if (proxyForId != null && proxyForId.length() != 0) {
       operation.addParameter(Parameter.of(ParamsProperty.PROXYING_FOR, proxyForId));
     }
 

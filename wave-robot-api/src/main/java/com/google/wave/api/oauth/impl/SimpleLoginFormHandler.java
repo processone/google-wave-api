@@ -40,7 +40,6 @@ public class SimpleLoginFormHandler implements LoginFormHandler {
   /** The id of the button element. */
   private static final String LOGIN_BUTTON_ID = "successButton";
 
-  @Override
   public void renderLogin(String userRecordKey, Wavelet wavelet) {
     // Clear login form.
     wavelet.getRootBlip().all().delete();

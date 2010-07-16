@@ -79,7 +79,6 @@ public class Participants implements Set<String> {
    *     {@code wavelet.addParticipant()} has been queued. Otherwise, returns
    *     {@code false}.
    */
-  @Override
   public boolean add(String participantId) {
     if (participants.contains(participantId)) {
       return false;
@@ -97,7 +96,6 @@ public class Participants implements Set<String> {
    * @return {@code true} if the set contains the given participant id.
    *     Otherwise, returns {@code false}.
    */
-  @Override
   public boolean contains(Object participantId) {
     return participants.contains(participantId);
   }
@@ -108,7 +106,6 @@ public class Participants implements Set<String> {
    *
    * @return the number of participants.
    */
-  @Override
   public int size() {
     return participants.size();
   }
@@ -119,17 +116,14 @@ public class Participants implements Set<String> {
    * @return {@code true} if the participant set is empty. Otherwise, returns
    *     {@code false}.
    */
-  @Override
   public boolean isEmpty() {
     return participants.isEmpty();
   }
 
-  @Override
   public Iterator<String> iterator() {
     return participants.iterator();
   }
 
-  @Override
   public boolean addAll(Collection<? extends String> c) {
     boolean retval = false;
     for (String participant : c) {
@@ -138,12 +132,10 @@ public class Participants implements Set<String> {
     return retval;
   }
 
-  @Override
   public void clear() {
     throw new UnsupportedOperationException();
   }
 
-  @Override
   public boolean containsAll(Collection<?> c) {
     boolean retval = true;
     for (Object participant : c) {
@@ -151,28 +143,23 @@ public class Participants implements Set<String> {
     }
     return retval;
   }
-
-  @Override
+  
   public boolean remove(Object o) {
     throw new UnsupportedOperationException();
   }
 
-  @Override
   public boolean removeAll(Collection<?> c) {
     throw new UnsupportedOperationException();
   }
 
-  @Override
   public boolean retainAll(Collection<?> c) {
     throw new UnsupportedOperationException();
   }
 
-  @Override
   public Object[] toArray() {
     return participants.toArray();
   }
 
-  @Override
   public <T> T[] toArray(T[] a) {
     return participants.toArray(a);
   }

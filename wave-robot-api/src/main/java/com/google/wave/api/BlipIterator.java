@@ -66,12 +66,10 @@ public abstract class BlipIterator<T> implements Iterator<Range> {
     reset();
   }
 
-  @Override
   public boolean hasNext() {
     return hitsLeft != 0  && getNextIndex() != -1;
   }
 
-  @Override
   public Range next() {
     if (hitsLeft == 0) {
       throw new NoSuchElementException();
@@ -93,7 +91,6 @@ public abstract class BlipIterator<T> implements Iterator<Range> {
    * @throws UnsupportedOperationException this operation is not supported yet.
    *     it will throw {@link UnsupportedOperationException} on all invocations.
    */
-  @Override
   public void remove() {
     throw new UnsupportedOperationException();
   }

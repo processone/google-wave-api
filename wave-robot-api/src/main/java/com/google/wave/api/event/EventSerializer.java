@@ -198,7 +198,6 @@ public class EventSerializer {
   public static Map<ParamsProperty, Object> extractPropertiesToParamsPropertyMap(Event event)
       throws EventSerializationException {
     return extractProperties(event, new KeyConverter<ParamsProperty>() {
-      @Override
       public ParamsProperty convert(String key) {
         return ParamsProperty.fromKey(key);
       }
@@ -219,7 +218,6 @@ public class EventSerializer {
   public static Map<String, Object> extractPropertiesToStringMap(Event event)
       throws EventSerializationException {
     return extractProperties(event, new KeyConverter<String>() {
-      @Override
       public String convert(String key) {
         return key;
       }

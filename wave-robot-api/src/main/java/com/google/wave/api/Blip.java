@@ -97,7 +97,7 @@ public class Blip {
         parentBlipId, new ArrayList<Annotation>(), new TreeMap<Integer, Element>(), wavelet);
 
     // Make sure that initial content is valid, and starts with newline.
-    if (this.content == null || this.content.isEmpty()) {
+    if (this.content == null || this.content.length() == 0) {
       this.content = "\n";
     } else if (!this.content.startsWith("\n")) {
       this.content = "\n" + this.content;

@@ -116,7 +116,6 @@ public class Tags implements Iterable<String> {
     return tags.isEmpty();
   }
 
-  @Override
   public Iterator<String> iterator() {
     return new TagsIterator();
   }
@@ -142,19 +141,16 @@ public class Tags implements Iterable<String> {
       this.storeIterator = tags.iterator();
     }
 
-    @Override
     public boolean hasNext() {
       return storeIterator.hasNext();
     }
 
-    @Override
     public String next() {
       removeCalled = false;
       currentTag = storeIterator.next();
       return currentTag;
     }
 
-    @Override
     public void remove() {
       if (removeCalled) {
         throw new IllegalStateException("remove() has been called after the last call to next().");

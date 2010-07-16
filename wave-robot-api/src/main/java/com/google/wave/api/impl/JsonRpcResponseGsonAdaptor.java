@@ -42,7 +42,6 @@ import java.util.Map.Entry;
 public class JsonRpcResponseGsonAdaptor implements JsonDeserializer<JsonRpcResponse>,
     JsonSerializer<JsonRpcResponse>{
 
-  @Override
   public JsonRpcResponse deserialize(JsonElement json, Type type,
       JsonDeserializationContext context) throws JsonParseException {
     JsonObject jsonObject = json.getAsJsonObject();
@@ -78,7 +77,6 @@ public class JsonRpcResponseGsonAdaptor implements JsonDeserializer<JsonRpcRespo
     return JsonRpcResponse.result(id, properties);
   }
 
-  @Override
   public JsonElement serialize(JsonRpcResponse src, Type type, JsonSerializationContext context) {
     JsonObject result = new JsonObject();
     result.addProperty(ResponseProperty.ID.key(), src.getId());

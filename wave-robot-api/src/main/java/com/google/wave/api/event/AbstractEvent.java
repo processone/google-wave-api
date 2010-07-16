@@ -74,32 +74,26 @@ public abstract class AbstractEvent implements Event {
     this(null, null, null, null, -1, null);
   }
 
-  @Override
   public EventType getType() {
     return type;
   }
 
-  @Override
   public Wavelet getWavelet() {
     return wavelet;
   }
 
-  @Override
   public Blip getBlip() {
     return wavelet.getBlip(blipId);
   }
 
-  @Override
   public String getModifiedBy() {
     return modifiedBy;
   }
 
-  @Override
   public long getTimestamp() {
     return timestamp;
   }
 
-  @Override
   public EventMessageBundle getBundle() {
     return bundle;
   }

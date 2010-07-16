@@ -704,7 +704,6 @@ public class BlipContentRefs implements Iterable<Range> {
     return result;
   }
 
-  @Override
   public Iterator<Range> iterator() {
     iterator.reset();
     return iterator;

@@ -109,12 +109,10 @@ public class GsonFactory {
    */
   private static class NonSerializableExclusionStrategy implements ExclusionStrategy {
 
-    @Override
     public boolean shouldSkipClass(Class<?> clazz) {
       return false;
     }
 
-    @Override
     public boolean shouldSkipField(FieldAttributes f) {
       return f.getAnnotation(NonJsonSerializable.class) != null;
     }
@@ -124,7 +122,6 @@ public class GsonFactory {
    * An instance creator that creates an empty {@link Annotation}.
    */
   private static class AnnotationInstanceCreator implements InstanceCreator<Annotation> {
-    @Override
     public Annotation createInstance(Type type) {
       return new Annotation("", "", -1, -1);
     }
@@ -134,7 +131,6 @@ public class GsonFactory {
    * An instance creator that creates an empty {@link Annotation}.
    */
   private static class RangeInstanceCreator implements InstanceCreator<Range> {
-    @Override
     public Range createInstance(Type type) {
       return new Range(-1, -1);
     }

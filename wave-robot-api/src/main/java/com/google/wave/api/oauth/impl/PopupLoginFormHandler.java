@@ -40,7 +40,6 @@ public class PopupLoginFormHandler implements LoginFormHandler {
     this.remoteHost = remoteHost;
   }
 
-  @Override
   public void renderLogin(String userRecordKey, Wavelet wavelet) {
     // Clear login form.
     wavelet.getRootBlip().all().delete();
