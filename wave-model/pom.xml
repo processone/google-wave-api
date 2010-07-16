@@ -53,6 +53,14 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<jvm>${JAVA_1_5_HOME}/bin/java</jvm>
+					<forkMode>once</forkMode>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<inherited>true</inherited>
 				<executions>
