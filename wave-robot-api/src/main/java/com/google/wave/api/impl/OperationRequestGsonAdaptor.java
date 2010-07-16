@@ -59,7 +59,7 @@ public class OperationRequestGsonAdaptor implements JsonSerializer<OperationRequ
    *     operation method during serialization.
    */
   public OperationRequestGsonAdaptor(String operationNamespace) {
-    if (operationNamespace != null && operationNamespace.length() == 0 &&
+    if (operationNamespace != null && operationNamespace.length() != 0 &&
         !operationNamespace.endsWith(".")) {
       operationNamespace += ".";
     }
